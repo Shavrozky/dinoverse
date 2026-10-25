@@ -1,0 +1,298 @@
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.heroHeader {
+  background-color: var(--museum-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.headerTop {
+  padding: var(--space-8) var(--space-8) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.eraMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  font-family: var(--font-family-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.periodTag {
+  color: var(--warm-brass);
+}
+
+.ageRange {
+  color: var(--text-muted);
+  font-family: var(--font-family-mono);
+}
+
+.titleRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.name {
+  font-family: var(--font-family-serif);
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--bone-white);
+  line-height: 1.05;
+}
+
+.taxonomyLine {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  font-size: 1.25rem;
+  color: var(--fossil-stone);
+}
+
+.scientificName {
+  font-family: var(--font-family-serif);
+  font-style: italic;
+  color: var(--warm-brass);
+}
+
+.meaning {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-family: var(--font-family-serif);
+  font-style: italic;
+}
+
+/* 3D Specimen Viewport */
+.viewerViewport {
+  position: relative;
+  min-height: 28rem;
+  margin: 0;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  text-align: center;
+  overflow: hidden;
+  background-color: var(--museum-charcoal);
+}
+
+.viewerFallback,
+.modelPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12) var(--space-8);
+  gap: var(--space-2);
+}
+
+.period_triassic {
+  background:
+    radial-gradient(circle at 50% 35%, rgba(194, 109, 67, 0.16), transparent 70%),
+    linear-gradient(180deg, #130f0d 0%, #080908 100%);
+}
+
+.period_jurassic {
+  background:
+    radial-gradient(circle at 50% 35%, rgba(91, 142, 114, 0.16), transparent 70%),
+    linear-gradient(180deg, #0d1410 0%, #080908 100%);
+}
+
+.period_cretaceous {
+  background:
+    radial-gradient(circle at 50% 35%, rgba(208, 163, 93, 0.16), transparent 70%),
+    linear-gradient(180deg, #14110a 0%, #080908 100%);
+}
+
+.viewerMonogram {
+  font-family: var(--font-family-serif);
+  font-size: 5rem;
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(232, 226, 213, 0.15);
+  line-height: 1;
+  margin-bottom: var(--space-2);
+}
+
+.viewerLabel {
+  font-family: var(--font-family-label);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--bone-white);
+}
+
+.viewerSubtext {
+  font-family: var(--font-family-label);
+  font-size: 0.75rem;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Quick Metrics Plaque */
+.quickStatsBar {
+  padding: var(--space-6) var(--space-8);
+  background-color: var(--museum-charcoal);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-6);
+}
+
+.quickStat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.quickStatLabel {
+  font-family: var(--font-family-label);
+  font-size: 0.72rem;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.quickStatValue {
+  font-family: var(--font-family-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--bone-white);
+  line-height: 1.1;
+}
+
+/* Editorial Content Layout */
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+@media (min-width: 880px) {
+  .contentGrid {
+    grid-template-columns: 1.25fr 1fr;
+  }
+}
+
+.sectionPlaque {
+  background-color: var(--museum-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.sectionHeading {
+  font-family: var(--font-family-label);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--warm-brass);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.leadText {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--bone-white);
+  line-height: 1.7;
+}
+
+.bodyText {
+  font-size: var(--font-size-base);
+  color: var(--fossil-stone);
+  line-height: 1.8;
+}
+
+/* Profile Plaque */
+.profileList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-4);
+}
+
+.profileItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--museum-charcoal);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.profileTerm {
+  font-family: var(--font-family-label);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+.profileDefinition {
+  font-family: var(--font-family-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--bone-white);
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+.tagBadge {
+  padding: 0.3rem 0.75rem;
+  background-color: var(--museum-charcoal);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-label);
+  font-size: 0.75rem;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--fossil-stone);
+}
+
+@media (max-width: 640px) {
+  .headerTop {
+    padding: var(--space-5);
+  }
+
+  .viewerViewport {
+    min-height: 22rem;
+  }
+
+  .quickStatsBar {
+    padding: var(--space-4) var(--space-5);
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sectionPlaque {
+    padding: var(--space-5);
+  }
+}

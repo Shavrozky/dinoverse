@@ -1,0 +1,56 @@
+.filtersContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.groupLabel {
+  font-family: var(--font-family-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--warm-brass);
+}
+
+.pillList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.pillButton {
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-label);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  background-color: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--fossil-stone);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.pillButton:hover {
+  background-color: var(--museum-surface-hover);
+  border-color: var(--border-medium);
+  color: var(--bone-white);
+}
+
+.pillButtonActive {
+  background-color: var(--brass-subtle);
+  border-color: var(--warm-brass);
+  color: var(--warm-brass);
+  font-weight: 600;
+}

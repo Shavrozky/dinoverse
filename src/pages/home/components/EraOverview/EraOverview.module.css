@@ -1,0 +1,109 @@
+.section {
+  padding: var(--space-24) 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.header {
+  margin-bottom: var(--space-12);
+}
+
+.eyebrow {
+  font-family: var(--font-family-label);
+  font-size: 0.75rem;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--warm-brass);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.title {
+  font-family: var(--font-family-serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 600;
+  color: var(--bone-white);
+  line-height: 1.1;
+}
+
+.eraGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-8);
+}
+
+.eraCard {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-8) var(--space-6);
+  background-color: var(--museum-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    border-color var(--transition-normal),
+    background-color var(--transition-normal);
+  position: relative;
+}
+
+.eraCard:hover {
+  border-color: var(--border-strong);
+  background-color: var(--museum-surface-elevated);
+}
+
+.eraIndex {
+  font-family: var(--font-family-mono);
+  font-size: 0.75rem;
+  color: var(--warm-brass);
+  margin-bottom: var(--space-6);
+}
+
+.eraName {
+  font-family: var(--font-family-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--bone-white);
+  line-height: 1;
+  margin-bottom: var(--space-2);
+  transition: color var(--transition-fast);
+}
+
+.eraCard:hover .eraName {
+  color: var(--warm-brass);
+}
+
+.eraAge {
+  font-family: var(--font-family-label);
+  font-size: 0.8rem;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--fossil-stone);
+  margin-bottom: var(--space-4);
+}
+
+.eraDescription {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: var(--space-6);
+}
+
+.eraLink {
+  margin-top: auto;
+  font-family: var(--font-family-label);
+  font-size: 0.75rem;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--warm-brass);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+@media (max-width: 860px) {
+  .eraGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}

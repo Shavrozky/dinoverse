@@ -1,0 +1,146 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(7, 8, 7, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  transition: border-color var(--transition-normal);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  gap: 1px;
+}
+
+.brandTitle {
+  font-family: var(--font-family-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  color: var(--bone-white);
+  line-height: 1;
+}
+
+.brandSubtitle {
+  font-family: var(--font-family-label);
+  font-size: 0.65rem;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--warm-brass);
+  line-height: 1;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-family-label);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--fossil-stone);
+  padding: 0.35rem 0;
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+.navIndex {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-family: var(--font-family-mono);
+}
+
+.navLink:hover {
+  color: var(--bone-white);
+}
+
+.navLink:hover .navIndex {
+  color: var(--warm-brass);
+}
+
+.activeLink {
+  color: var(--warm-brass);
+}
+
+.activeLink .navIndex {
+  color: var(--warm-brass);
+}
+
+.activeLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--warm-brass);
+}
+
+.audioButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background-color: rgba(20, 23, 20, 0.6);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-family-label);
+  font-size: 0.75rem;
+  letter-spacing: var(--tracking-wide);
+  color: var(--fossil-stone);
+  cursor: pointer;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.audioButton:hover {
+  border-color: var(--border-medium);
+  color: var(--bone-white);
+  background-color: var(--museum-surface-elevated);
+}
+
+.audioIndicator {
+  color: var(--warm-brass);
+  font-size: 0.65rem;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    gap: var(--space-3);
+  }
+
+  .navIndex {
+    display: none;
+  }
+
+  .navLink {
+    font-size: 0.8rem;
+  }
+
+  .audioButton {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.7rem;
+  }
+}

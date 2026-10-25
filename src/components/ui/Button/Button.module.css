@@ -1,0 +1,79 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.75rem 1.6rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-label);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-normal),
+    border-color var(--transition-normal),
+    color var(--transition-normal),
+    transform var(--transition-fast);
+  line-height: 1;
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Primary Museum CTA */
+.primary {
+  background-color: var(--warm-brass);
+  color: var(--museum-black);
+  border: 1px solid var(--warm-brass);
+}
+
+.primary:hover {
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: var(--museum-black);
+}
+
+/* Secondary Archival */
+.secondary {
+  background-color: rgba(20, 23, 20, 0.7);
+  color: var(--bone-white);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(8px);
+}
+
+.secondary:hover {
+  background-color: var(--museum-surface-elevated);
+  border-color: var(--border-medium);
+  color: var(--bone-white);
+}
+
+/* Outline Museum Line */
+.outline {
+  background-color: transparent;
+  color: var(--warm-brass);
+  border: 1px solid var(--border-medium);
+}
+
+.outline:hover {
+  border-color: var(--warm-brass);
+  background-color: var(--brass-subtle);
+  color: var(--bone-white);
+}
+
+/* Ghost / Minimal Link */
+.ghost {
+  background-color: transparent;
+  color: var(--fossil-stone);
+  border: 1px solid transparent;
+  padding: 0.5rem 0.8rem;
+}
+
+.ghost:hover {
+  color: var(--warm-brass);
+}

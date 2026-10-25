@@ -1,0 +1,30 @@
+.viewer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 28rem;
+  overflow: hidden;
+}
+
+.debugLabel {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  max-width: calc(100% - 2rem);
+  padding: 0.4rem 0.65rem;
+  overflow: hidden;
+  font-size: 0.75rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-text-muted);
+  background: rgb(0 0 0 / 45%);
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .viewer {
+    min-height: 22rem;
+  }
+}

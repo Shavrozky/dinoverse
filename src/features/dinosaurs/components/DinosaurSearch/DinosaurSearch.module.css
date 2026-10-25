@@ -1,0 +1,74 @@
+.searchWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.label {
+  font-family: var(--font-family-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--warm-brass);
+}
+
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: var(--space-4);
+  color: var(--warm-brass);
+  pointer-events: none;
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+.input {
+  width: 100%;
+  padding: 0.85rem 3rem 0.85rem 2.85rem;
+  background-color: rgba(7, 8, 7, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--bone-white);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base);
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--warm-brass);
+  background-color: var(--museum-surface-elevated);
+}
+
+.clearButton {
+  position: absolute;
+  right: var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: var(--radius-sm);
+  color: var(--fossil-stone);
+  background-color: transparent;
+  font-size: var(--font-size-sm);
+  transition: color var(--transition-fast);
+}
+
+.clearButton:hover {
+  color: var(--warm-brass);
+}

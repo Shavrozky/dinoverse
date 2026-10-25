@@ -1,0 +1,30 @@
+.emptyState {
+  text-align: center;
+  padding: var(--space-16) var(--space-6);
+  background-color: var(--museum-surface);
+  border: 1px dashed var(--border-medium);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.icon {
+  font-size: 2.5rem;
+  opacity: 0.5;
+}
+
+.title {
+  font-family: var(--font-family-serif);
+  font-size: var(--font-size-2xl);
+  color: var(--bone-white);
+}
+
+.description {
+  font-size: var(--font-size-base);
+  color: var(--text-muted);
+  max-width: 440px;
+  line-height: 1.6;
+  margin-bottom: var(--space-2);
+}
