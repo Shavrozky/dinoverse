@@ -1,30 +1,169 @@
 .viewer {
   position: relative;
   width: 100%;
-  height: 100%;
-  min-height: 28rem;
+  height: 30rem;
+  min-height: 30rem;
   overflow: hidden;
+  user-select: none;
+  touch-action: none;
 }
 
-.debugLabel {
+.topBar {
   position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  max-width: calc(100% - 2rem);
-  padding: 0.4rem 0.65rem;
-  overflow: hidden;
-  font-size: 0.75rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: var(--color-text-muted);
-  background: rgb(0 0 0 / 45%);
-  border-radius: var(--radius-sm);
+  top: var(--space-4);
+  left: var(--space-5);
+  right: var(--space-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
   pointer-events: none;
   z-index: 10;
 }
 
+.microInstruction {
+  font-family: var(--font-family-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background-color: rgba(7, 8, 7, 0.65);
+  border: 1px solid var(--border-subtle);
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-sm);
+  backdrop-filter: blur(6px);
+}
+
+.bottomBar {
+  position: absolute;
+  bottom: var(--space-4);
+  left: var(--space-5);
+  right: var(--space-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.animationGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  pointer-events: auto;
+  background-color: rgba(7, 8, 7, 0.75);
+  border: 1px solid var(--border-subtle);
+  padding: 0.25rem;
+  border-radius: var(--radius-sm);
+  backdrop-filter: blur(8px);
+}
+
+.groupLabel {
+  font-family: var(--font-family-label);
+  font-size: 0.68rem;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0 0.45rem;
+}
+
+.controlButton {
+  pointer-events: auto;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-label);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--fossil-stone);
+  background-color: rgba(19, 22, 19, 0.75);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.controlButton:hover {
+  color: var(--bone-white);
+  border-color: var(--border-medium);
+  background-color: var(--museum-surface-elevated);
+}
+
+.controlButtonActive {
+  color: var(--warm-brass);
+  border-color: var(--warm-brass);
+  background-color: var(--brass-subtle);
+}
+
+/* Loading & Error Overlays */
+.statusOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  text-align: center;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(14, 16, 14, 0.82) 0%,
+    rgba(7, 8, 7, 0.92) 100%
+  );
+  backdrop-filter: blur(4px);
+}
+
+.statusEyebrow {
+  font-family: var(--font-family-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--warm-brass);
+}
+
+.statusDescription {
+  font-size: var(--font-size-sm);
+  color: var(--fossil-stone);
+  max-width: 340px;
+}
+
+.progressValue {
+  font-family: var(--font-family-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: var(--space-1);
+}
+
 @media (max-width: 768px) {
   .viewer {
-    min-height: 22rem;
+    height: 23rem;
+    min-height: 23rem;
+  }
+
+  .topBar {
+    top: var(--space-3);
+    left: var(--space-3);
+    right: var(--space-3);
+  }
+
+  .bottomBar {
+    bottom: var(--space-3);
+    left: var(--space-3);
+    right: var(--space-3);
+  }
+
+  .microInstruction {
+    font-size: 0.64rem;
+    padding: 0.25rem 0.5rem;
   }
 }

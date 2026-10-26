@@ -2,10 +2,12 @@ import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container } from '@/components/ui';
 import { tyrannosaurusRex } from '@/data/dinosaurs/tyrannosaurus-rex';
+import { preloadDinosaurModel } from '@/three/loaders';
 import styles from './FeaturedSpecimen.module.css';
 
 export const FeaturedSpecimen: FC = () => {
   const dino = tyrannosaurusRex;
+  const handlePreload = () => preloadDinosaurModel(dino.modelPath);
 
   return (
     <section className={styles.section} aria-labelledby="featured-specimen-heading">
@@ -42,7 +44,11 @@ export const FeaturedSpecimen: FC = () => {
             </div>
 
             <div>
-              <Link to={`/dinosaur/${dino.slug}`}>
+              <Link
+                to={`/dinosaur/${dino.slug}`}
+                onPointerEnter={handlePreload}
+                onFocus={handlePreload}
+              >
                 <Button variant="secondary">Examine Specimen Record →</Button>
               </Link>
             </div>

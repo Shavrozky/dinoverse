@@ -22,6 +22,11 @@ import {
   isDinosaurSortOption,
   isGeologicalPeriod,
 } from '@/features/dinosaurs/types';
+import {
+  calculateCameraFraming,
+  calculateNormalizedTransform,
+  resolveAnimationActions,
+} from '@/three/utils/modelBounds';
 
 describe('Dinosaur dataset integrity', () => {
   it('contains at least 15 representative dinosaurs with unique IDs and slugs', () => {
@@ -159,5 +164,42 @@ describe('Formatting utilities', () => {
     assert.equal(formatMillionsOfYears(68, 66), '68–66 million years ago');
     assert.equal(formatResultCount(1), '1 dinosaur');
     assert.equal(formatResultCount(20), '20 dinosaurs');
+  });
+});
+
+describe('Phase 3 3D Specimen Utilities', () => {
+  it('normalizes model bounds uniformly and grounds lowest Y to 0', () => {
+    const transform = calculateNormalizedTransform(
+      {
+        min: [-1, -2, -5],
+        max: [1, 2, 5],
+        size: [2, 4, 10],
+        center: [0, 0, 0],
+        maxDimension: 10,
+      },
+      3.8
+    );
+
+    assert.equal(Number(transform.scale.toFixed(2)), 0.38);
+    // Grounding: -min.y * scale = 2 * 0.38 = 0.76
+    assert.equal(Number(transform.position[1].toFixed(2)), 0.76);
+    assert.equal(transform.position[0], 0);
+    assert.equal(transform.position[2], 0);
+  });
+
+  it('computes adaptive camera framing with valid distance bounds', () => {
+    const framing = calculateCameraFraming([0.6, 1.35, 3.8], 40, 1.45);
+    assert.ok(framing.minDistance > 0);
+    assert.ok(framing.maxDistance > framing.minDistance);
+    assert.ok(framing.target[1] > 0);
+  });
+
+  it('resolves and orders animation clips into IDLE, WALK, ROAR actions', () => {
+    const actions = resolveAnimationActions(['Roar', 'Walk', 'Idle']);
+    assert.deepEqual(
+      actions.map((a) => a.label),
+      ['IDLE', 'WALK', 'ROAR']
+    );
+    assert.deepEqual(resolveAnimationActions([]), []);
   });
 });

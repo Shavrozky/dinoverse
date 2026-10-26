@@ -8,6 +8,8 @@ export interface ThreeCanvasProps {
   style?: CSSProperties;
   cameraPosition?: [number, number, number];
   cameraFov?: number;
+  shadows?: boolean;
+  dpr?: number | [number, number];
   fallback?: ReactNode;
 }
 
@@ -16,7 +18,9 @@ export const ThreeCanvas: FC<ThreeCanvasProps> = ({
   className,
   style,
   cameraPosition = [0, 0, 5],
-  cameraFov = 45,
+  cameraFov = 40,
+  shadows = true,
+  dpr = [1, 2],
   fallback = <ScenePlaceholder />,
 }) => {
   return (
@@ -32,9 +36,10 @@ export const ThreeCanvas: FC<ThreeCanvasProps> = ({
       }}
     >
       <Canvas
-        camera={{ position: cameraPosition, fov: cameraFov }}
-        dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true }}
+        shadows={shadows}
+        camera={{ position: cameraPosition, fov: cameraFov, near: 0.1, far: 100 }}
+        dpr={dpr}
+        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       >
         <Suspense fallback={fallback}>{children}</Suspense>
       </Canvas>

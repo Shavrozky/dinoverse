@@ -11,13 +11,6 @@ export const MuseumHero: FC = () => {
 
   return (
     <section className={styles.heroSection} aria-label="Museum Hero Exhibition">
-      <div className={styles.viewportLayer} aria-hidden="true">
-        <ThreeCanvas style={{ width: '100%', height: '100%' }}>
-          <HeroScene />
-        </ThreeCanvas>
-        <span className={styles.specimenHint}>SPECIMEN VIEWPORT // DRAG TO ROTATE</span>
-      </div>
-
       <Container>
         <motion.div
           className={styles.contentWrapper}
@@ -25,34 +18,57 @@ export const MuseumHero: FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: 'easeOut' }}
         >
-          <div className={styles.archiveBadge}>
-            <span className={styles.dot} />
-            <span>Digital Paleontology Archive // Vol. 01</span>
+          {/* Primary Editorial Typography & CTAs */}
+          <div className={styles.textContent}>
+            <div className={styles.archiveBadge}>
+              <span className={styles.dot} />
+              <span>Digital Paleontology Archive // Vol. 01</span>
+            </div>
+
+            <div className={styles.headlineGroup}>
+              <span className={styles.eyebrow}>Explore The</span>
+              <h1 className={styles.title}>
+                Mesozoic
+                <br />
+                World
+              </h1>
+              <p className={styles.description}>
+                An interactive paleontology exhibition documenting prehistoric life across the
+                Triassic, Jurassic, and Cretaceous periods through 3D holotypes and anatomical
+                records.
+              </p>
+            </div>
+
+            <div className={styles.actionRow}>
+              <Link to="/explore">
+                <Button variant="primary">Enter The Archive →</Button>
+              </Link>
+              <Link to="/dinosaur/velociraptor-mongoliensis">
+                <Button variant="outline">Inspect Velociraptor</Button>
+              </Link>
+            </div>
           </div>
 
-          <div className={styles.headlineGroup}>
-            <span className={styles.eyebrow}>Explore The</span>
-            <h1 className={styles.title}>
-              Mesozoic
-              <br />
-              World
-            </h1>
-            <p className={styles.description}>
-              An interactive paleontology exhibition documenting prehistoric life across the
-              Triassic, Jurassic, and Cretaceous periods through 3D holotypes and anatomical
-              records.
-            </p>
+          {/* 3D Exhibition Specimen Layer */}
+          <div className={styles.viewportLayer} aria-hidden="true">
+            <ThreeCanvas
+              cameraPosition={[0, 0, 4.8]}
+              cameraFov={38}
+              fallback={null}
+              style={{ width: '100%', height: '100%' }}
+            >
+              <HeroScene reducedMotion={Boolean(prefersReducedMotion)} />
+            </ThreeCanvas>
           </div>
 
-          <div className={styles.actionRow}>
-            <Link to="/explore">
-              <Button variant="primary">Enter The Archive →</Button>
-            </Link>
-            <Link to="/dinosaur/tyrannosaurus-rex">
-              <Button variant="outline">Inspect T. Rex</Button>
-            </Link>
+          {/* Archival Specimen Label */}
+          <div className={styles.specimenBadge} aria-label="Hero Specimen Identification">
+            <span className={styles.specimenTag}>Specimen // Holotype</span>
+            <span className={styles.specimenName}>Velociraptor mongoliensis</span>
+            <span className={styles.specimenMeta}>Dromaeosauridae • Late Cretaceous</span>
           </div>
 
+          {/* Bottom Stats Ticker */}
           <div className={styles.statsTicker} role="region" aria-label="Archive Statistics">
             <div className={styles.statItem}>
               <span className={styles.statValue}>03</span>
