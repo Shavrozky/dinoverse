@@ -1,0 +1,6 @@
+.curatedRule {
+  height: 1px;
+  width: 100%;
+  background-color: var(--border-subtle);
+  margin-bottom: var(--space-6);
+}

@@ -67,21 +67,15 @@
 }
 
 .period_triassic {
-  background:
-    radial-gradient(circle at 60% 40%, rgba(194, 109, 67, 0.18) 0%, transparent 70%),
-    linear-gradient(180deg, #120e0c 0%, #080908 100%);
+  background: var(--period-triassic-bg);
 }
 
 .period_jurassic {
-  background:
-    radial-gradient(circle at 60% 40%, rgba(91, 142, 114, 0.18) 0%, transparent 70%),
-    linear-gradient(180deg, #0d1410 0%, #080908 100%);
+  background: var(--period-jurassic-bg);
 }
 
 .period_cretaceous {
-  background:
-    radial-gradient(circle at 60% 40%, rgba(208, 163, 93, 0.18) 0%, transparent 70%),
-    linear-gradient(180deg, #14110b 0%, #080908 100%);
+  background: var(--period-cretaceous-bg);
 }
 
 .specimenImage {
@@ -112,13 +106,13 @@
   font-weight: 400;
   font-style: italic;
   letter-spacing: -0.02em;
-  color: rgba(232, 226, 213, 0.22);
+  color: var(--monogram-color);
   line-height: 1;
   transition: color var(--transition-normal);
 }
 
 .cardLink:hover .monogram {
-  color: rgba(208, 163, 93, 0.4);
+  color: var(--monogram-hover-color);
 }
 
 .cladeTag {

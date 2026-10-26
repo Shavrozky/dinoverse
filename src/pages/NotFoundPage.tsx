@@ -2,9 +2,11 @@ import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Button } from '@/components/ui';
 import { useDocumentTitle } from '@/hooks';
+import { useTranslation } from '@/i18n';
 
 export const NotFoundPage: FC = () => {
-  useDocumentTitle('Specimen Not Cataloged — 404');
+  const { t } = useTranslation();
+  useDocumentTitle(t.notFound.documentTitle);
 
   return (
     <div style={{ padding: 'var(--space-24) 0' }}>
@@ -41,7 +43,7 @@ export const NotFoundPage: FC = () => {
               marginBottom: 'var(--space-2)',
             }}
           >
-            STRATIGRAPHIC VOID // 404
+            {t.notFound.badge}
           </span>
           <h1
             style={{
@@ -51,7 +53,7 @@ export const NotFoundPage: FC = () => {
               marginBottom: 'var(--space-3)',
             }}
           >
-            Extinct Path
+            {t.notFound.title}
           </h1>
           <p
             style={{
@@ -60,11 +62,10 @@ export const NotFoundPage: FC = () => {
               lineHeight: 1.7,
             }}
           >
-            The requested archival path has eroded into prehistoric strata. No specimen records or
-            exhibition halls correspond to this URL.
+            {t.notFound.description}
           </p>
           <Link to="/">
-            <Button variant="primary">Return to Exhibition Base →</Button>
+            <Button variant="primary">{t.notFound.returnBaseCta}</Button>
           </Link>
         </div>
       </Container>

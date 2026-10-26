@@ -12,12 +12,16 @@
   letter-spacing: var(--tracking-wider);
   text-decoration: none;
   cursor: pointer;
+  line-height: 1;
+  /*
+    Only properties that change are transitioned. Never `all` — a blanket
+    transition makes every hover feel slow and breaks unrelated state changes.
+  */
   transition:
     background-color var(--transition-normal),
     border-color var(--transition-normal),
     color var(--transition-normal),
-    transform var(--transition-fast);
-  line-height: 1;
+    box-shadow var(--transition-normal);
 }
 
 .button:disabled {
@@ -26,22 +30,52 @@
   pointer-events: none;
 }
 
+.button:focus-visible {
+  outline: 1px solid var(--warm-brass);
+  outline-offset: 3px;
+}
+
+/* The label shifts by a hair on hover — the button itself never scales. */
+.label {
+  display: inline-block;
+  transition: transform var(--transition-normal);
+}
+
+.button:hover .label {
+  transform: translateX(-1px);
+}
+
+/* Trailing arrow: the only element that visibly travels. */
+.arrow {
+  display: inline-block;
+  color: currentColor;
+  transition: transform var(--transition-normal);
+}
+
+.button:hover .arrow {
+  transform: translateX(4px);
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
 /* Primary Museum CTA */
 .primary {
   background-color: var(--warm-brass);
-  color: var(--museum-black);
+  color: var(--button-primary-text);
   border: 1px solid var(--warm-brass);
 }
 
 .primary:hover {
   background-color: var(--color-accent-hover);
   border-color: var(--color-accent-hover);
-  color: var(--museum-black);
+  color: var(--button-primary-text);
 }
 
 /* Secondary Archival */
 .secondary {
-  background-color: rgba(20, 23, 20, 0.7);
+  background-color: var(--control-bg);
   color: var(--bone-white);
   border: 1px solid var(--border-subtle);
   backdrop-filter: blur(8px);
@@ -76,4 +110,21 @@
 
 .ghost:hover {
   color: var(--warm-brass);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .label,
+  .arrow {
+    transition-duration: 0.01ms;
+  }
+
+  .button:hover .label,
+  .button:hover .arrow {
+    transform: none;
+  }
+
+  .button:active {
+    transform: none;
+  }
 }

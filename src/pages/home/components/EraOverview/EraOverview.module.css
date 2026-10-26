@@ -17,6 +17,15 @@
   margin-bottom: var(--space-2);
 }
 
+/* Archival draw under the section eyebrow. */
+.headerRule {
+  height: 1px;
+  width: 100%;
+  max-width: 220px;
+  background-color: var(--border-medium);
+  margin: var(--space-3) 0 var(--space-4);
+}
+
 .title {
   font-family: var(--font-family-serif);
   font-size: clamp(2rem, 3.5vw, 3rem);
@@ -40,15 +49,46 @@
   border-radius: var(--radius-sm);
   text-decoration: none;
   color: inherit;
+  position: relative;
+  overflow: hidden;
+  /*
+    Only colour and border interpolate: the card's box never moves, so hover
+    cannot shift the grid or trigger layout.
+  */
   transition:
     border-color var(--transition-normal),
     background-color var(--transition-normal);
-  position: relative;
 }
 
 .eraCard:hover {
   border-color: var(--border-strong);
   background-color: var(--museum-surface-elevated);
+}
+
+.eraCard:focus-visible {
+  outline: 1px solid var(--warm-brass);
+  outline-offset: 3px;
+}
+
+/*
+  Thin brass rule that draws across the top of the plate on hover.
+  scaleX from the left — a signature archival gesture, no layout impact.
+*/
+.eraRule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--warm-brass);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--transition-slow);
+}
+
+.eraCard:hover .eraRule,
+.eraCard:focus-visible .eraRule {
+  transform: scaleX(1);
 }
 
 .eraIndex {
@@ -66,11 +106,16 @@
   color: var(--bone-white);
   line-height: 1;
   margin-bottom: var(--space-2);
-  transition: color var(--transition-fast);
+  /* Heading shifts 2px — the card does not. */
+  transform: translateX(0);
+  transition:
+    color var(--transition-fast),
+    transform var(--transition-normal);
 }
 
 .eraCard:hover .eraName {
   color: var(--warm-brass);
+  transform: translateX(2px);
 }
 
 .eraAge {
@@ -80,6 +125,11 @@
   text-transform: uppercase;
   color: var(--fossil-stone);
   margin-bottom: var(--space-4);
+  transition: color var(--transition-fast);
+}
+
+.eraCard:hover .eraAge {
+  color: var(--bone-white);
 }
 
 .eraDescription {
@@ -101,9 +151,35 @@
   gap: var(--space-2);
 }
 
+.eraArrow {
+  display: inline-block;
+  transition: transform var(--transition-fast);
+}
+
+.eraCard:hover .eraArrow {
+  transform: translateX(4px);
+}
+
 @media (max-width: 860px) {
   .eraGrid {
     grid-template-columns: 1fr;
     gap: var(--space-6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eraRule,
+  .eraName,
+  .eraAge,
+  .eraArrow {
+    transition: none;
+  }
+
+  .eraCard:hover .eraName {
+    transform: none;
+  }
+
+  .eraCard:hover .eraArrow {
+    transform: none;
   }
 }

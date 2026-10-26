@@ -1,14 +1,15 @@
 import type { FC } from 'react';
+import { useTranslation } from '@/i18n';
 
 interface LoadingScreenProps {
   message?: string;
   fullscreen?: boolean;
 }
 
-export const LoadingScreen: FC<LoadingScreenProps> = ({
-  message = 'Loading prehistoric world...',
-  fullscreen = false,
-}) => {
+export const LoadingScreen: FC<LoadingScreenProps> = ({ message, fullscreen = false }) => {
+  const { t } = useTranslation();
+  const displayMessage = message ?? t.common.loadingDefault;
+
   return (
     <div
       role="status"
@@ -40,7 +41,7 @@ export const LoadingScreen: FC<LoadingScreenProps> = ({
           to { transform: rotate(360deg); }
         }
       `}</style>
-      <p style={{ fontSize: 'var(--font-size-sm)', letterSpacing: '0.05em' }}>{message}</p>
+      <p style={{ fontSize: 'var(--font-size-sm)', letterSpacing: '0.05em' }}>{displayMessage}</p>
     </div>
   );
 };

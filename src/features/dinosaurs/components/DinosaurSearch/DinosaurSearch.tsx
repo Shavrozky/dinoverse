@@ -1,4 +1,5 @@
 import { useId, type FC } from 'react';
+import { useTranslation } from '@/i18n';
 import styles from './DinosaurSearch.module.css';
 
 export interface DinosaurSearchProps {
@@ -8,11 +9,12 @@ export interface DinosaurSearchProps {
 
 export const DinosaurSearch: FC<DinosaurSearchProps> = ({ value, onChange }) => {
   const inputId = useId();
+  const { t } = useTranslation();
 
   return (
     <div className={styles.searchWrapper} role="search">
       <label htmlFor={inputId} className={styles.label}>
-        Search Archive
+        {t.explore.searchLabel}
       </label>
       <div className={styles.inputContainer}>
         <span className={styles.searchIcon} aria-hidden="true">
@@ -24,7 +26,7 @@ export const DinosaurSearch: FC<DinosaurSearchProps> = ({ value, onChange }) => 
           className={styles.input}
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          placeholder="Search dinosaurs by name, scientific name, clade, or region..."
+          placeholder={t.explore.searchPlaceholder}
           autoComplete="off"
           spellCheck={false}
         />
@@ -33,8 +35,8 @@ export const DinosaurSearch: FC<DinosaurSearchProps> = ({ value, onChange }) => 
             type="button"
             className={styles.clearButton}
             onClick={() => onChange('')}
-            aria-label="Clear search query"
-            title="Clear search"
+            aria-label={t.explore.clearSearchAria}
+            title={t.explore.clearSearchTitle}
           >
             ✕
           </button>

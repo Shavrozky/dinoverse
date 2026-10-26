@@ -1,0 +1,158 @@
+.page {
+  padding: var(--space-12) 0 var(--space-24);
+}
+
+.header {
+  margin-bottom: var(--space-12);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.eyebrow {
+  font-family: var(--font-family-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--warm-brass);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.title {
+  font-family: var(--font-family-serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--bone-white);
+  line-height: 1.05;
+  margin-bottom: var(--space-3);
+}
+
+.subtitle {
+  color: var(--fossil-stone);
+  max-width: 640px;
+  line-height: 1.7;
+}
+
+/*
+  Chronological spine. The line is painted by the container; the animated
+  overlay above it draws down to the last marker with scaleY, so nothing
+  reflows while it animates.
+*/
+.timeline {
+  position: relative;
+  padding-left: var(--space-8);
+}
+
+.spine {
+  position: absolute;
+  top: 0;
+  bottom: var(--space-8);
+  left: 3px;
+  width: 1px;
+  background-color: var(--border-medium);
+  transform-origin: top center;
+}
+
+.eraList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.eraRow {
+  position: relative;
+}
+
+.marker {
+  position: absolute;
+  top: var(--space-8);
+  left: calc(var(--space-8) * -1 + 0px);
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  background-color: var(--warm-brass);
+  transform: translateX(-3px);
+}
+
+.eraCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background-color: var(--museum-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-8);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.eraCard:hover {
+  border-color: var(--border-strong);
+  background-color: var(--museum-surface-elevated);
+}
+
+.eraCard:focus-visible {
+  outline: 1px solid var(--warm-brass);
+  outline-offset: 3px;
+}
+
+.eraMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-family-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.eraAge {
+  color: var(--warm-brass);
+  font-family: var(--font-family-label);
+  letter-spacing: var(--tracking-wider);
+}
+
+.eraHeading {
+  font-family: var(--font-family-serif);
+  font-size: var(--font-size-2xl);
+  color: var(--bone-white);
+  margin: var(--space-2) 0;
+}
+
+.eraDescription {
+  font-size: var(--font-size-sm);
+  color: var(--fossil-stone);
+  line-height: 1.65;
+}
+
+.eraLink {
+  margin-top: auto;
+  padding-top: var(--space-4);
+  font-family: var(--font-family-label);
+  font-size: 0.75rem;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--warm-brass);
+}
+
+@media (max-width: 640px) {
+  .timeline {
+    padding-left: var(--space-6);
+  }
+
+  .eraCard {
+    padding: var(--space-5);
+  }
+
+  .marker {
+    left: calc(var(--space-6) * -1 + 0px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spine {
+    display: none;
+  }
+}

@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState, type FC } from 'react';
-import type { GraphicsQuality } from '@/store/useAppSettings';
+import type { AppTheme, GraphicsQuality } from '@/store/useAppSettings';
 import { CameraRig } from '../camera';
 import { DinosaurModel, type DinosaurModelReadyPayload } from '../components/DinosaurModel';
 import { DinosaurMuseumLighting } from '../lighting';
@@ -10,6 +10,7 @@ export interface DinosaurViewerSceneProps {
   activeClipName: string | null;
   resetTrigger: number;
   quality?: GraphicsQuality;
+  theme?: AppTheme;
   reducedMotion?: boolean;
   onAnimationsAvailable?: (actions: SpecimenAnimationAction[]) => void;
 }
@@ -21,6 +22,7 @@ export const DinosaurViewerScene: FC<DinosaurViewerSceneProps> = ({
   activeClipName,
   resetTrigger,
   quality = 'high',
+  theme = 'dark',
   reducedMotion = false,
   onAnimationsAvailable,
 }) => {
@@ -37,9 +39,11 @@ export const DinosaurViewerScene: FC<DinosaurViewerSceneProps> = ({
     [onAnimationsAvailable]
   );
 
+  const isLight = theme === 'light';
+
   return (
     <>
-      <DinosaurMuseumLighting quality={quality} />
+      <DinosaurMuseumLighting quality={quality} theme={theme} instant={reducedMotion} />
 
       <DinosaurModel
         src={modelPath}
@@ -52,13 +56,21 @@ export const DinosaurViewerScene: FC<DinosaurViewerSceneProps> = ({
       <group position={[0, -0.002, 0]}>
         <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
           <circleGeometry args={[3.2, 48]} />
-          <meshStandardMaterial color="#0c0e0c" roughness={0.92} metalness={0.05} />
+          <meshStandardMaterial
+            color={isLight ? '#dcd4c4' : '#0c0e0c'}
+            roughness={0.92}
+            metalness={0.05}
+          />
         </mesh>
 
         {/* Subtle archival measurement ring */}
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.003, 0]}>
           <ringGeometry args={[2.35, 2.37, 64]} />
-          <meshBasicMaterial color="#d0a35d" transparent opacity={0.18} />
+          <meshBasicMaterial
+            color={isLight ? '#9d7432' : '#d0a35d'}
+            transparent
+            opacity={isLight ? 0.28 : 0.18}
+          />
         </mesh>
       </group>
 

@@ -27,6 +27,14 @@ import {
   calculateNormalizedTransform,
   resolveAnimationActions,
 } from '@/three/utils/modelBounds';
+import {
+  formatLocalizedDiet,
+  formatLocalizedLocations,
+  formatLocalizedPeriod,
+  getLocalizedDinosaurContent,
+  getTranslationDictionary,
+} from '@/i18n';
+import { isAppLanguage, isAppTheme, useAppSettings } from '@/store/useAppSettings';
 
 describe('Dinosaur dataset integrity', () => {
   it('contains at least 15 representative dinosaurs with unique IDs and slugs', () => {
@@ -201,5 +209,91 @@ describe('Phase 3 3D Specimen Utilities', () => {
       ['IDLE', 'WALK', 'ROAR']
     );
     assert.deepEqual(resolveAnimationActions([]), []);
+  });
+});
+
+describe('Bilingual Localization & Archive Light Theme', () => {
+  it('maintains identical top-level and nested key parity between English and Indonesian dictionaries', () => {
+    const enDict = getTranslationDictionary('en');
+    const idDict = getTranslationDictionary('id');
+
+    const getKeys = (obj: Record<string, unknown>, prefix = ''): string[] =>
+      Object.entries(obj).flatMap(([key, value]) => {
+        const path = prefix ? `${prefix}.${key}` : key;
+        if (value && typeof value === 'object' && !Array.isArray(value)) {
+          return getKeys(value as Record<string, unknown>, path);
+        }
+        return [path];
+      });
+
+    assert.deepEqual(
+      getKeys(enDict as unknown as Record<string, unknown>),
+      getKeys(idDict as unknown as Record<string, unknown>)
+    );
+  });
+
+  it('provides localized Indonesian descriptions and meanings for every dinosaur while preserving scientific names', () => {
+    for (const dino of dinosaurs) {
+      const enContent = getLocalizedDinosaurContent(dino, 'en');
+      const idContent = getLocalizedDinosaurContent(dino, 'id');
+
+      assert.ok(idContent.meaning.length > 0, `Missing ID meaning for ${dino.slug}`);
+      assert.ok(
+        idContent.shortDescription.length > 0,
+        `Missing ID shortDescription for ${dino.slug}`
+      );
+      assert.ok(idContent.description.length > 0, `Missing ID description for ${dino.slug}`);
+      assert.notEqual(
+        idContent.shortDescription,
+        enContent.shortDescription,
+        `Indonesian shortDescription should be translated for ${dino.slug}`
+      );
+      // Canonical scientific name remains unchanged
+      assert.equal(dino.scientificName.includes(' '), true);
+    }
+  });
+
+  it('formats geological periods, stages, diets, and locations accurately in English and Indonesian', () => {
+    assert.equal(formatLocalizedPeriod('cretaceous', 'Late', 'en'), 'Late Cretaceous');
+    assert.equal(formatLocalizedPeriod('cretaceous', 'Late', 'id'), 'Kapur Akhir');
+    assert.equal(formatLocalizedPeriod('jurassic', 'Early', 'id'), 'Jura Awal');
+    assert.equal(formatLocalizedPeriod('triassic', undefined, 'id'), 'Trias');
+
+    assert.equal(formatLocalizedDiet('carnivore', 'en'), 'Carnivore');
+    assert.equal(formatLocalizedDiet('carnivore', 'id'), 'Karnivora');
+    assert.equal(formatLocalizedDiet('herbivore', 'id'), 'Herbivora');
+    assert.equal(formatLocalizedDiet('omnivore', 'id'), 'Omnivora');
+    assert.equal(formatLocalizedDiet('piscivore', 'id'), 'Piscivora');
+
+    assert.deepEqual(formatLocalizedLocations(['North America', 'Asia'], 'id'), [
+      'Amerika Utara',
+      'Asia',
+    ]);
+  });
+
+  it('formats weights, millions of years, and result counts in Indonesian', () => {
+    assert.equal(formatWeight(8500, 'id'), '8.5 ton');
+    assert.equal(formatMillionsOfYears(68, 66, 'id'), '68–66 juta tahun lalu');
+    assert.equal(formatResultCount(20, 'id'), '20 dinosaurus');
+  });
+
+  it('validates and toggles language and theme preferences cleanly in useAppSettings', () => {
+    assert.equal(isAppLanguage('en'), true);
+    assert.equal(isAppLanguage('id'), true);
+    assert.equal(isAppLanguage('fr'), false);
+
+    assert.equal(isAppTheme('dark'), true);
+    assert.equal(isAppTheme('light'), true);
+    assert.equal(isAppTheme('sepia'), false);
+
+    useAppSettings.getState().setLanguage('id');
+    assert.equal(useAppSettings.getState().language, 'id');
+    useAppSettings.getState().toggleLanguage();
+    assert.equal(useAppSettings.getState().language, 'en');
+
+    useAppSettings.getState().setTheme('light');
+    assert.equal(useAppSettings.getState().theme, 'light');
+    useAppSettings.getState().toggleTheme();
+    assert.equal(useAppSettings.getState().theme, 'dark');
   });
 });

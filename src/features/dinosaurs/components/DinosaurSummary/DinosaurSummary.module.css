@@ -105,21 +105,15 @@
 }
 
 .period_triassic {
-  background:
-    radial-gradient(circle at 50% 35%, rgba(194, 109, 67, 0.16), transparent 70%),
-    linear-gradient(180deg, #130f0d 0%, #080908 100%);
+  background: var(--period-triassic-bg);
 }
 
 .period_jurassic {
-  background:
-    radial-gradient(circle at 50% 35%, rgba(91, 142, 114, 0.16), transparent 70%),
-    linear-gradient(180deg, #0d1410 0%, #080908 100%);
+  background: var(--period-jurassic-bg);
 }
 
 .period_cretaceous {
-  background:
-    radial-gradient(circle at 50% 35%, rgba(208, 163, 93, 0.16), transparent 70%),
-    linear-gradient(180deg, #14110a 0%, #080908 100%);
+  background: var(--period-cretaceous-bg);
 }
 
 .viewerMonogram {
@@ -127,7 +121,7 @@
   font-size: 5rem;
   font-style: italic;
   font-weight: 400;
-  color: rgba(232, 226, 213, 0.15);
+  color: var(--monogram-color);
   line-height: 1;
   margin-bottom: var(--space-2);
 }

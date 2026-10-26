@@ -7,3 +7,4 @@ export * from './DinosaurResultCount';
 export * from './DinosaurEmptyState';
 export * from './DinosaurSummary';
 export * from './RelatedDinosaurs';
+export * from './StaggeredCards';

@@ -1,17 +1,29 @@
-:root {
+:root,
+[data-theme='dark'] {
   /* Museum Dark Earth & Charcoal Palette */
-  --museum-black: #070807;
-  --museum-charcoal: #0e100e;
-  --museum-surface: #131613;
-  --museum-surface-elevated: #191c19;
-  --museum-surface-hover: #1f241f;
+  --background-primary: #070807;
+  --background-secondary: #0e100e;
+  --surface-primary: #131613;
+  --surface-secondary: #191c19;
 
-  --bone-white: #e8e2d5;
-  --fossil-stone: #c8c0ae;
+  --text-primary: #e8e2d5;
+  --text-secondary: #c8c0ae;
   --text-muted: #858177;
 
-  --aged-gold: #b89455;
-  --warm-brass: #d0a35d;
+  --accent-primary: #d0a35d;
+  --accent-secondary: #b89455;
+
+  --museum-black: var(--background-primary);
+  --museum-charcoal: var(--background-secondary);
+  --museum-surface: var(--surface-primary);
+  --museum-surface-elevated: var(--surface-secondary);
+  --museum-surface-hover: #1f241f;
+
+  --bone-white: var(--text-primary);
+  --fossil-stone: var(--text-secondary);
+
+  --aged-gold: var(--accent-secondary);
+  --warm-brass: var(--accent-primary);
   --brass-glow: rgba(208, 163, 93, 0.15);
   --brass-subtle: rgba(208, 163, 93, 0.08);
 
@@ -20,6 +32,43 @@
   --border-subtle: rgba(215, 198, 160, 0.12);
   --border-medium: rgba(215, 198, 160, 0.22);
   --border-strong: rgba(215, 198, 160, 0.35);
+
+  /* Theme-aware Surface & Atmosphere Tokens */
+  --header-bg: rgba(7, 8, 7, 0.85);
+  --header-bg-scrolled: rgba(9, 11, 9, 0.94);
+  --control-bg: rgba(20, 23, 20, 0.65);
+  --input-bg: rgba(7, 8, 7, 0.6);
+  --viewer-hud-bg: rgba(7, 8, 7, 0.72);
+  --viewer-btn-bg: rgba(19, 22, 19, 0.78);
+  --viewer-overlay-bg: radial-gradient(
+    circle at 50% 50%,
+    rgba(14, 16, 14, 0.82) 0%,
+    rgba(7, 8, 7, 0.92) 100%
+  );
+  --button-primary-text: #070807;
+  --hero-title-shadow: 0 4px 30px rgba(0, 0, 0, 0.85);
+  --monogram-color: rgba(232, 226, 213, 0.2);
+  --monogram-hover-color: rgba(208, 163, 93, 0.4);
+
+  --featured-visual-bg:
+    radial-gradient(circle at 50% 40%, rgba(208, 163, 93, 0.16) 0%, transparent 65%),
+    linear-gradient(180deg, #161a16 0%, #070807 100%);
+  --featured-visual-shadow: inset 0 0 100px rgba(0, 0, 0, 0.7);
+
+  --period-triassic-bg:
+    radial-gradient(circle at 60% 40%, rgba(194, 109, 67, 0.18) 0%, transparent 70%),
+    linear-gradient(180deg, #120e0c 0%, #080908 100%);
+  --period-jurassic-bg:
+    radial-gradient(circle at 60% 40%, rgba(91, 142, 114, 0.18) 0%, transparent 70%),
+    linear-gradient(180deg, #0d1410 0%, #080908 100%);
+  --period-cretaceous-bg:
+    radial-gradient(circle at 60% 40%, rgba(208, 163, 93, 0.18) 0%, transparent 70%),
+    linear-gradient(180deg, #14110b 0%, #080908 100%);
+
+  --page-bg-gradient:
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(208, 163, 93, 0.05) 0%, transparent 70%),
+    radial-gradient(circle at 100% 50%, rgba(36, 28, 21, 0.25) 0%, transparent 60%),
+    radial-gradient(circle at 0% 80%, rgba(18, 25, 20, 0.25) 0%, transparent 60%);
 
   /* Semantic Core Tokens */
   --color-background: var(--museum-black);
@@ -42,6 +91,11 @@
   --color-accent-subtle: var(--brass-subtle);
   --color-emerald: #5b8e72;
   --color-danger: #c94a46;
+
+  /* Shadows — Natural Vignette & Soft Ambient */
+  --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --shadow-card-hover: 0 16px 40px rgba(0, 0, 0, 0.65);
 
   /* Typography Systems */
   --font-family-serif: 'Cormorant Garamond', Garamond, 'Georgia', 'Times New Roman', serif;
@@ -97,13 +151,106 @@
   --radius-lg: 6px;
   --radius-full: 9999px;
 
-  /* Shadows — Natural Vignette & Soft Ambient */
-  --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.4);
-  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.5);
-  --shadow-card-hover: 0 16px 40px rgba(0, 0, 0, 0.65);
-
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
   --transition-normal: 250ms cubic-bezier(0.16, 1, 0.3, 1);
   --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Archive Light Theme — Natural History Catalogue & Field Journal */
+[data-theme='light'] {
+  --background-primary: #f1ede3;
+  --background-secondary: #e8e2d6;
+  --surface-primary: #ebe6da;
+  --surface-secondary: #dfd8ca;
+
+  --text-primary: #171713;
+  --text-secondary: #4c493f;
+  --text-muted: #767166;
+
+  --accent-primary: #9d7432;
+  --accent-secondary: #70522a;
+
+  --museum-black: var(--background-primary);
+  --museum-charcoal: var(--background-secondary);
+  --museum-surface: var(--surface-primary);
+  --museum-surface-elevated: #e3ddd0;
+  --museum-surface-hover: var(--surface-secondary);
+
+  --bone-white: var(--text-primary);
+  --fossil-stone: var(--text-secondary);
+
+  --aged-gold: var(--accent-secondary);
+  --warm-brass: var(--accent-primary);
+  --brass-glow: rgba(157, 116, 50, 0.16);
+  --brass-subtle: rgba(157, 116, 50, 0.1);
+
+  --earth-dark: #dfd6c5;
+  --forest-deep: #dae0d6;
+  --border-subtle: rgba(50, 42, 30, 0.16);
+  --border-medium: rgba(50, 42, 30, 0.28);
+  --border-strong: rgba(50, 42, 30, 0.42);
+
+  /* Theme-aware Surface & Atmosphere Tokens */
+  --header-bg: rgba(241, 237, 227, 0.9);
+  --header-bg-scrolled: rgba(241, 237, 227, 0.97);
+  --control-bg: rgba(235, 230, 218, 0.85);
+  --input-bg: rgba(250, 247, 240, 0.85);
+  --viewer-hud-bg: rgba(241, 237, 227, 0.88);
+  --viewer-btn-bg: rgba(235, 230, 218, 0.92);
+  --viewer-overlay-bg: radial-gradient(
+    circle at 50% 50%,
+    rgba(241, 237, 227, 0.88) 0%,
+    rgba(232, 226, 214, 0.96) 100%
+  );
+  --button-primary-text: #faf7f0;
+  --hero-title-shadow: 0 2px 24px rgba(241, 237, 227, 0.85);
+  --monogram-color: rgba(23, 23, 19, 0.13);
+  --monogram-hover-color: rgba(157, 116, 50, 0.35);
+
+  --featured-visual-bg:
+    radial-gradient(circle at 50% 40%, rgba(157, 116, 50, 0.15) 0%, transparent 65%),
+    linear-gradient(180deg, #e5decb 0%, #d8cfba 100%);
+  --featured-visual-shadow: inset 0 0 60px rgba(70, 58, 40, 0.12);
+
+  --period-triassic-bg:
+    radial-gradient(circle at 60% 40%, rgba(176, 92, 52, 0.14) 0%, transparent 70%),
+    linear-gradient(180deg, #e6ddd0 0%, #dcd2c2 100%);
+  --period-jurassic-bg:
+    radial-gradient(circle at 60% 40%, rgba(72, 118, 92, 0.14) 0%, transparent 70%),
+    linear-gradient(180deg, #dde3d8 0%, #d3dacd 100%);
+  --period-cretaceous-bg:
+    radial-gradient(circle at 60% 40%, rgba(157, 116, 50, 0.16) 0%, transparent 70%),
+    linear-gradient(180deg, #e6dfcf 0%, #dbd2bf 100%);
+
+  --page-bg-gradient:
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(157, 116, 50, 0.07) 0%, transparent 70%),
+    radial-gradient(circle at 100% 50%, rgba(180, 165, 140, 0.18) 0%, transparent 60%),
+    radial-gradient(circle at 0% 80%, rgba(165, 155, 135, 0.15) 0%, transparent 60%);
+
+  /* Semantic Core Tokens */
+  --color-background: var(--museum-black);
+  --color-bg-primary: var(--museum-black);
+  --color-bg-secondary: var(--museum-charcoal);
+  --color-surface: var(--museum-surface);
+  --color-surface-elevated: var(--museum-surface-elevated);
+  --color-surface-hover: var(--museum-surface-hover);
+  --color-surface-border: var(--border-subtle);
+  --color-border: var(--border-subtle);
+  --color-border-subtle: var(--border-subtle);
+
+  --color-text-primary: var(--bone-white);
+  --color-text-secondary: var(--fossil-stone);
+  --color-text-muted: var(--text-muted);
+
+  --color-accent: var(--warm-brass);
+  --color-accent-hover: #825e25;
+  --color-accent-glow: var(--brass-glow);
+  --color-accent-subtle: var(--brass-subtle);
+  --color-emerald: #3d6f54;
+  --color-danger: #a8322e;
+
+  --shadow-subtle: 0 4px 18px rgba(45, 38, 28, 0.08);
+  --shadow-card: 0 10px 26px rgba(45, 38, 28, 0.1);
+  --shadow-card-hover: 0 14px 34px rgba(45, 38, 28, 0.15);
 }

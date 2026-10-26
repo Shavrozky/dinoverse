@@ -6,6 +6,13 @@ export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant?: ButtonVariant;
+  /**
+   * Render an animated trailing arrow.
+   *
+   * Kept as a separate element (rather than a glyph inside the translation
+   * string) so it can travel on hover without moving the label text.
+   */
+  arrow?: boolean;
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -14,6 +21,7 @@ export const Button: FC<ButtonProps> = ({
   className = '',
   style,
   disabled,
+  arrow = false,
   ...rest
 }) => {
   const variantClass = styles[variant] ?? styles.primary;
@@ -25,7 +33,12 @@ export const Button: FC<ButtonProps> = ({
       style={style as CSSProperties}
       {...rest}
     >
-      {children}
+      <span className={styles.label}>{children}</span>
+      {arrow && (
+        <span className={styles.arrow} aria-hidden="true">
+          →
+        </span>
+      )}
     </button>
   );
 };

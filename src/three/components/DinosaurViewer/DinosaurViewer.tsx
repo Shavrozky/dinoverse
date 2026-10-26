@@ -8,7 +8,8 @@ import {
   type ReactNode,
 } from 'react';
 import { useProgress } from '@react-three/drei';
-import { useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { useTranslation } from '@/i18n';
 import { useAppSettings, type GraphicsQuality } from '@/store';
 import { preloadDinosaurModel } from '../../loaders';
 import { DinosaurViewerScene } from '../../scenes/DinosaurViewerScene';
@@ -26,6 +27,9 @@ interface ViewerErrorBoundaryProps {
   children: ReactNode;
   resetKey: string;
   onRetry: () => void;
+  errorEyebrow: string;
+  errorDescription: string;
+  retryLabel: string;
 }
 
 interface ViewerErrorBoundaryState {
@@ -60,12 +64,10 @@ class ViewerErrorBoundary extends Component<ViewerErrorBoundaryProps, ViewerErro
     if (this.state.hasError) {
       return (
         <div className={styles.statusOverlay} role="alert">
-          <span className={styles.statusEyebrow}>Digital Specimen Unavailable</span>
-          <p className={styles.statusDescription}>
-            The 3D fossil reconstruction could not be loaded from the archive.
-          </p>
+          <span className={styles.statusEyebrow}>{this.props.errorEyebrow}</span>
+          <p className={styles.statusDescription}>{this.props.errorDescription}</p>
           <button type="button" className={styles.controlButton} onClick={this.handleRetry}>
-            Retry Reconstruction
+            {this.props.retryLabel}
           </button>
         </div>
       );
@@ -77,17 +79,27 @@ class ViewerErrorBoundary extends Component<ViewerErrorBoundaryProps, ViewerErro
 
 const SpecimenLoadingOverlay: FC = () => {
   const { active, progress } = useProgress();
-
-  if (!active) {
-    return null;
-  }
+  const { t } = useTranslation();
+  const prefersReducedMotion = useReducedMotion() ?? false;
 
   return (
-    <div className={styles.statusOverlay} role="status" aria-live="polite">
-      <span className={styles.statusEyebrow}>Specimen Loading</span>
-      <p className={styles.statusDescription}>Preparing digital reconstruction...</p>
-      <span className={styles.progressValue}>{Math.round(progress)}%</span>
-    </div>
+    <AnimatePresence>
+      {active && (
+        <motion.div
+          className={styles.statusOverlay}
+          role="status"
+          aria-live="polite"
+          initial={prefersReducedMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <span className={styles.statusEyebrow}>{t.viewer.loadingEyebrow}</span>
+          <p className={styles.statusDescription}>{t.viewer.loadingDescription}</p>
+          <span className={styles.progressValue}>{Math.round(progress)}%</span>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
@@ -105,7 +117,9 @@ function getDprForQuality(quality: GraphicsQuality): number | [number, number] {
 
 export const DinosaurViewer: FC<DinosaurViewerProps> = ({ name, modelPath }) => {
   const prefersReducedMotion = useReducedMotion() ?? false;
+  const { t } = useTranslation();
   const graphicsQuality = useAppSettings((state) => state.graphicsQuality);
+  const theme = useAppSettings((state) => state.theme);
 
   const [availableActions, setAvailableActions] = useState<SpecimenAnimationAction[]>([]);
   const [selectedClip, setSelectedClip] = useState<string | null>(null);
@@ -154,11 +168,17 @@ export const DinosaurViewer: FC<DinosaurViewerProps> = ({ name, modelPath }) => 
     <div
       className={styles.viewer}
       role="region"
-      aria-label={`Interactive 3D specimen viewer for ${name}`}
+      aria-label={`${t.viewer.regionAriaPrefix} ${name}`}
     >
-      <ViewerErrorBoundary resetKey={`${modelPath}-${retryCount}`} onRetry={handleRetry}>
+      <ViewerErrorBoundary
+        resetKey={`${modelPath}-${retryCount}`}
+        onRetry={handleRetry}
+        errorEyebrow={t.viewer.errorEyebrow}
+        errorDescription={t.viewer.errorDescription}
+        retryLabel={t.viewer.retryButton}
+      >
         <div className={styles.topBar}>
-          <span className={styles.microInstruction}>Drag to Rotate • Scroll to Inspect</span>
+          <span className={styles.microInstruction}>{t.viewer.microInstruction}</span>
         </div>
 
         <SpecimenLoadingOverlay />
@@ -177,6 +197,7 @@ export const DinosaurViewer: FC<DinosaurViewerProps> = ({ name, modelPath }) => 
             activeClipName={selectedClip}
             resetTrigger={resetTrigger}
             quality={graphicsQuality}
+            theme={theme}
             reducedMotion={prefersReducedMotion}
             onAnimationsAvailable={handleAnimationsAvailable}
           />
@@ -184,10 +205,17 @@ export const DinosaurViewer: FC<DinosaurViewerProps> = ({ name, modelPath }) => 
 
         <div className={styles.bottomBar}>
           {availableActions.length > 0 ? (
-            <div className={styles.animationGroup} role="group" aria-label="Specimen motion states">
-              <span className={styles.groupLabel}>Motion</span>
+            <div
+              className={styles.animationGroup}
+              role="group"
+              aria-label={t.viewer.motionGroupAria}
+            >
+              <span className={styles.groupLabel}>{t.viewer.motionLabel}</span>
               {availableActions.map((action) => {
                 const isActive = selectedClip === action.clipName;
+                const actionKey = action.label as keyof typeof t.viewer.actionLabels;
+                const localizedActionLabel = t.viewer.actionLabels[actionKey] ?? action.label;
+
                 return (
                   <button
                     key={action.clipName}
@@ -200,7 +228,7 @@ export const DinosaurViewer: FC<DinosaurViewerProps> = ({ name, modelPath }) => 
                       )
                     }
                   >
-                    {action.label}
+                    {localizedActionLabel}
                   </button>
                 );
               })}
@@ -213,9 +241,9 @@ export const DinosaurViewer: FC<DinosaurViewerProps> = ({ name, modelPath }) => 
             type="button"
             className={styles.controlButton}
             onClick={handleResetView}
-            aria-label="Reset camera view"
+            aria-label={t.viewer.resetViewAria}
           >
-            Reset View
+            {t.viewer.resetView}
           </button>
         </div>
       </ViewerErrorBoundary>

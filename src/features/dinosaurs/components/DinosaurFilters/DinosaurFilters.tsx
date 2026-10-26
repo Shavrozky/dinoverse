@@ -1,7 +1,7 @@
 import type { FC } from 'react';
-import { PERIOD_LABELS } from '@/data/periods';
+import { formatLocalizedDiet, formatLocalizedPeriod, useTranslation } from '@/i18n';
 import type { DinosaurDiet, GeologicalPeriod } from '@/types';
-import { DIET_LABELS, type DietFilterValue, type PeriodFilterValue } from '../../types';
+import type { DietFilterValue, PeriodFilterValue } from '../../types';
 import styles from './DinosaurFilters.module.css';
 
 export interface DinosaurFiltersProps {
@@ -21,10 +21,12 @@ export const DinosaurFilters: FC<DinosaurFiltersProps> = ({
   onPeriodChange,
   onDietChange,
 }) => {
+  const { t, language } = useTranslation();
+
   return (
     <div className={styles.filtersContainer}>
-      <div className={styles.filterGroup} role="group" aria-label="Filter by geological period">
-        <span className={styles.groupLabel}>Period</span>
+      <div className={styles.filterGroup} role="group" aria-label={t.explore.periodFilterGroupAria}>
+        <span className={styles.groupLabel}>{t.explore.periodLabel}</span>
         <div className={styles.pillList}>
           <button
             type="button"
@@ -32,7 +34,7 @@ export const DinosaurFilters: FC<DinosaurFiltersProps> = ({
             aria-pressed={selectedPeriod === 'all'}
             onClick={() => onPeriodChange('all')}
           >
-            All
+            {t.explore.allOption}
           </button>
           {availablePeriods.map((period) => {
             const isActive = selectedPeriod === period;
@@ -44,15 +46,15 @@ export const DinosaurFilters: FC<DinosaurFiltersProps> = ({
                 aria-pressed={isActive}
                 onClick={() => onPeriodChange(period)}
               >
-                {PERIOD_LABELS[period]}
+                {formatLocalizedPeriod(period, undefined, language)}
               </button>
             );
           })}
         </div>
       </div>
 
-      <div className={styles.filterGroup} role="group" aria-label="Filter by diet">
-        <span className={styles.groupLabel}>Diet</span>
+      <div className={styles.filterGroup} role="group" aria-label={t.explore.dietFilterGroupAria}>
+        <span className={styles.groupLabel}>{t.explore.dietLabel}</span>
         <div className={styles.pillList}>
           <button
             type="button"
@@ -60,7 +62,7 @@ export const DinosaurFilters: FC<DinosaurFiltersProps> = ({
             aria-pressed={selectedDiet === 'all'}
             onClick={() => onDietChange('all')}
           >
-            All
+            {t.explore.allOption}
           </button>
           {availableDiets.map((diet) => {
             const isActive = selectedDiet === diet;
@@ -72,7 +74,7 @@ export const DinosaurFilters: FC<DinosaurFiltersProps> = ({
                 aria-pressed={isActive}
                 onClick={() => onDietChange(diet)}
               >
-                {DIET_LABELS[diet]}
+                {formatLocalizedDiet(diet, language)}
               </button>
             );
           })}

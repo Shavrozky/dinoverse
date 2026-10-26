@@ -109,15 +109,13 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.7);
+  box-shadow: var(--featured-visual-shadow);
 }
 
 .visualAtmosphere {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(circle at 50% 40%, rgba(208, 163, 93, 0.16) 0%, transparent 65%),
-    linear-gradient(180deg, #161a16 0%, #070807 100%);
+  background: var(--featured-visual-bg);
   z-index: 1;
 }
 
@@ -128,7 +126,7 @@
   font-size: 8rem;
   font-style: italic;
   font-weight: 400;
-  color: rgba(232, 226, 213, 0.2);
+  color: var(--monogram-color);
   line-height: 1;
   user-select: none;
 }

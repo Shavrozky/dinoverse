@@ -1,3 +1,5 @@
+import type { AppLanguage } from '@/store/useAppSettings';
+
 /**
  * Formats a length in meters for display (e.g., 12.3 -> "12.3 m", 9 -> "9 m").
  */
@@ -14,31 +16,44 @@ export function formatMeters(meters: number): string {
 }
 
 /**
- * Formats a mass in kilograms into kg or tonnes (e.g., 8500 -> "8.5 tonnes", 75 -> "75 kg").
+ * Formats a mass in kilograms into kg or tonnes/ton (e.g., 8500 -> "8.5 tonnes" or "8.5 ton").
  */
-export function formatWeight(kilograms: number): string {
+export function formatWeight(kilograms: number, language: AppLanguage = 'en'): string {
   if (kilograms >= 1000) {
     const tonnes = kilograms / 1000;
     const formatted = Number.isInteger(tonnes) ? tonnes.toString() : tonnes.toFixed(1);
+    if (language === 'id') {
+      return `${formatted} ton`;
+    }
     return `${formatted} ${tonnes === 1 ? 'tonne' : 'tonnes'}`;
   }
-  return `${kilograms.toLocaleString('en-US')} kg`;
+  const locale = language === 'id' ? 'id-ID' : 'en-US';
+  return `${kilograms.toLocaleString(locale)} kg`;
 }
 
 /**
- * Formats a geological time interval in millions of years ago (e.g., "68–66 million years ago").
+ * Formats a geological time interval in millions of years ago
+ * (e.g., "68–66 million years ago" or "68–66 juta tahun lalu").
  */
-export function formatMillionsOfYears(fromMya: number, toMya?: number): string {
+export function formatMillionsOfYears(
+  fromMya: number,
+  toMya?: number,
+  language: AppLanguage = 'en'
+): string {
+  const unit = language === 'id' ? 'juta tahun lalu' : 'million years ago';
   if (toMya === undefined || fromMya === toMya) {
-    return `${fromMya} million years ago`;
+    return `${fromMya} ${unit}`;
   }
-  return `${fromMya}–${toMya} million years ago`;
+  return `${fromMya}–${toMya} ${unit}`;
 }
 
 /**
- * Formats result counts with proper singular/plural noun agreement.
+ * Formats result counts with proper localized noun agreement.
  */
-export function formatResultCount(count: number): string {
+export function formatResultCount(count: number, language: AppLanguage = 'en'): string {
+  if (language === 'id') {
+    return `${count} dinosaurus`;
+  }
   return `${count} ${count === 1 ? 'dinosaur' : 'dinosaurs'}`;
 }
 

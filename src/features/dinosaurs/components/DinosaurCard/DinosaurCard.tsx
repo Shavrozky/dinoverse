@@ -1,10 +1,9 @@
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useReducedMotion } from 'framer-motion';
 import { dinosaurs } from '@/data/dinosaurs';
 import { formatPeriodLabel } from '@/data/periods';
+import { formatLocalizedDiet, getLocalizedDinosaurContent, useTranslation } from '@/i18n';
 import type { Dinosaur } from '@/types';
-import { DIET_LABELS } from '../../types';
 import { formatLength, getDinosaurInitials } from '../../utils';
 import styles from './DinosaurCard.module.css';
 
@@ -13,10 +12,20 @@ export interface DinosaurCardProps {
   specimenIndex?: number;
 }
 
+/**
+ * Museum specimen plate.
+ *
+ * Intentionally static: entrance animation is owned by `StaggeredCards` so the
+ * whole grid arrives as one authored group rather than each card animating
+ * itself. Hover/focus feedback is CSS-only (transform + colour), which keeps it
+ * off the main thread and automatically respects `prefers-reduced-motion`.
+ */
 export const DinosaurCard: FC<DinosaurCardProps> = ({ dinosaur, specimenIndex }) => {
-  const prefersReducedMotion = useReducedMotion();
-  const periodLabel = formatPeriodLabel(dinosaur.period, dinosaur.periodStage);
-  const dietLabel = DIET_LABELS[dinosaur.diet];
+  const { t, language } = useTranslation();
+
+  const periodLabel = formatPeriodLabel(dinosaur.period, dinosaur.periodStage, language);
+  const dietLabel = formatLocalizedDiet(dinosaur.diet, language);
+  const localizedContent = getLocalizedDinosaurContent(dinosaur, language);
   const initials = getDinosaurInitials(dinosaur.scientificName);
   const periodClass = styles[`period_${dinosaur.period}`] ?? '';
 
@@ -26,19 +35,14 @@ export const DinosaurCard: FC<DinosaurCardProps> = ({ dinosaur, specimenIndex })
       const found = dinosaurs.findIndex((d) => d.slug === dinosaur.slug);
       return found >= 0 ? found + 1 : 1;
     })();
-  const specimenCode = `SPECIMEN ${String(index).padStart(3, '0')}`;
+  const specimenCode = `${t.explore.specimenLabel} ${String(index).padStart(3, '0')}`;
 
   return (
-    <motion.article
-      className={styles.cardArticle}
-      initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.25, ease: 'easeOut' }}
-    >
+    <article className={styles.cardArticle}>
       <Link
         to={`/dinosaur/${dinosaur.slug}`}
         className={styles.cardLink}
-        aria-label={`${dinosaur.name} (${dinosaur.scientificName}) — ${periodLabel}, ${dietLabel}, approx. ${formatLength(dinosaur.lengthMeters)}`}
+        aria-label={`${dinosaur.name} (${dinosaur.scientificName}) — ${periodLabel}, ${dietLabel}, ${t.explore.approxShort} ${formatLength(dinosaur.lengthMeters)}`}
       >
         <div className={styles.plateHeader}>
           <span className={styles.specimenNumber}>{specimenCode}</span>
@@ -67,7 +71,7 @@ export const DinosaurCard: FC<DinosaurCardProps> = ({ dinosaur, specimenIndex })
             <span className={styles.scientificName}>{dinosaur.scientificName}</span>
           </div>
 
-          <p className={styles.shortDescription}>{dinosaur.shortDescription}</p>
+          <p className={styles.shortDescription}>{localizedContent.shortDescription}</p>
 
           <div className={styles.metaFooter}>
             <div>
@@ -81,6 +85,6 @@ export const DinosaurCard: FC<DinosaurCardProps> = ({ dinosaur, specimenIndex })
           </div>
         </div>
       </Link>
-    </motion.article>
+    </article>
   );
 };

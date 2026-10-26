@@ -1,134 +1,103 @@
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Container } from '@/components/ui';
+import { Reveal } from '@/components/common';
 import { geologicalPeriods } from '@/data/periods';
-import { useDocumentTitle } from '@/hooks';
+import { useDocumentTitle, useReducedMotionPreference } from '@/hooks';
+import { useTranslation } from '@/i18n';
+import { motionEasing, motionStagger } from '@/lib/motion';
+import styles from './TimelinePage.module.css';
 
+/**
+ * Timeline.
+ *
+ * Motion is chronological and informational only: the vertical spine draws
+ * downward once, then era markers reveal in order. There is no scroll
+ * hijacking — the browser scrolls normally and the spine simply draws when the
+ * timeline enters view.
+ */
 export const TimelinePage: FC = () => {
-  useDocumentTitle('Geological Timeline — Chronostratigraphy');
+  const { t, language } = useTranslation();
+  const prefersReducedMotion = useReducedMotionPreference();
+  useDocumentTitle(t.timeline.documentTitle);
 
   return (
-    <div style={{ padding: 'var(--space-12) 0 var(--space-24)' }}>
+    <div className={styles.page}>
       <Container>
-        <header
-          style={{
-            marginBottom: 'var(--space-12)',
-            paddingBottom: 'var(--space-8)',
-            borderBottom: '1px solid var(--border-subtle)',
-          }}
-        >
-          <span
-            style={{
-              fontFamily: 'var(--font-family-label)',
-              fontSize: '0.75rem',
-              fontWeight: 600,
-              textTransform: 'uppercase',
-              letterSpacing: 'var(--tracking-widest)',
-              color: 'var(--warm-brass)',
-              display: 'block',
-              marginBottom: 'var(--space-2)',
-            }}
-          >
-            Chronostratigraphic Record
-          </span>
-          <h1
-            style={{
-              fontFamily: 'var(--font-family-serif)',
-              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-              color: 'var(--bone-white)',
-              lineHeight: 1.05,
-              marginBottom: 'var(--space-3)',
-            }}
-          >
-            Geological Timeline
-          </h1>
-          <p style={{ color: 'var(--fossil-stone)', maxWidth: '640px', lineHeight: 1.7 }}>
-            Travel through 186 million years of the Mesozoic Era. Stratigraphic layers record the
-            emergence, diversification, and catastrophic terminus of non-avian dinosaurs.
-          </p>
-        </header>
+        <Reveal as="header" className={styles.header}>
+          <span className={styles.eyebrow}>{t.timeline.eyebrow}</span>
+          <h1 className={styles.title}>{t.timeline.title}</h1>
+          <p className={styles.subtitle}>{t.timeline.subtitle}</p>
+        </Reveal>
 
-        <section
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: 'var(--space-8)',
-          }}
-        >
-          {geologicalPeriods.map((period, index) => (
-            <Link
-              key={period.id}
-              to={`/explore?period=${period.id}`}
-              style={{
-                backgroundColor: 'var(--museum-surface)',
-                border: '1px solid var(--border-subtle)',
-                borderRadius: 'var(--radius-sm)',
-                padding: 'var(--space-8)',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 'var(--space-3)',
-                textDecoration: 'none',
-                color: 'inherit',
-                transition:
-                  'border-color var(--transition-fast), background-color var(--transition-fast)',
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  fontFamily: 'var(--font-family-mono)',
-                  fontSize: '0.75rem',
-                  color: 'var(--text-muted)',
-                }}
-              >
-                <span>0{index + 1} // ERA</span>
-                <span
-                  style={{
-                    color: 'var(--warm-brass)',
-                    fontFamily: 'var(--font-family-label)',
-                    letterSpacing: 'var(--tracking-wider)',
+        <div className={styles.timeline}>
+          {/* Archival spine: draws top-to-bottom once, on entry. */}
+          {!prefersReducedMotion && (
+            <motion.div
+              className={styles.spine}
+              aria-hidden="true"
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.9, ease: motionEasing.museum }}
+            />
+          )}
+
+          <motion.div
+            className={styles.eraList}
+            initial={prefersReducedMotion ? false : 'hidden'}
+            whileInView={prefersReducedMotion ? undefined : 'visible'}
+            viewport={{ once: true, amount: 0.1 }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: motionStagger.wide } },
+            }}
+          >
+            {geologicalPeriods.map((period, index) => {
+              const localizedPeriod = t.periods[period.id];
+              const periodName = localizedPeriod?.name ?? period.name;
+              const periodDesc = localizedPeriod?.description ?? period.description;
+              const headingText =
+                language === 'id'
+                  ? `${t.timeline.periodHeadingSuffix} ${periodName}`
+                  : `${periodName} ${t.timeline.periodHeadingSuffix}`;
+
+              return (
+                <motion.div
+                  key={period.id}
+                  className={styles.eraRow}
+                  variants={{
+                    hidden: { opacity: 0, y: 18 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { duration: 0.6, ease: motionEasing.museum },
+                    },
                   }}
                 >
-                  {period.startMya}—{period.endMya} MYA
-                </span>
-              </div>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-family-serif)',
-                  fontSize: 'var(--font-size-2xl)',
-                  color: 'var(--bone-white)',
-                  margin: 'var(--space-2) 0',
-                }}
-              >
-                {period.name} Period
-              </h2>
-              <p
-                style={{
-                  fontSize: 'var(--font-size-sm)',
-                  color: 'var(--fossil-stone)',
-                  lineHeight: 1.65,
-                }}
-              >
-                {period.description}
-              </p>
-              <span
-                style={{
-                  marginTop: 'auto',
-                  paddingTop: 'var(--space-4)',
-                  fontFamily: 'var(--font-family-label)',
-                  fontSize: '0.75rem',
-                  letterSpacing: 'var(--tracking-wider)',
-                  textTransform: 'uppercase',
-                  color: 'var(--warm-brass)',
-                }}
-              >
-                View {period.name} Specimens →
-              </span>
-            </Link>
-          ))}
-        </section>
+                  <span className={styles.marker} aria-hidden="true" />
+
+                  <Link to={`/explore?period=${period.id}`} className={styles.eraCard}>
+                    <div className={styles.eraMeta}>
+                      <span>
+                        0{index + 1} // {t.timeline.eraWord}
+                      </span>
+                      <span className={styles.eraAge}>
+                        {period.startMya}—{period.endMya} {t.timeline.myaUnit}
+                      </span>
+                    </div>
+                    <h2 className={styles.eraHeading}>{headingText}</h2>
+                    <p className={styles.eraDescription}>{periodDesc}</p>
+                    <span className={styles.eraLink}>
+                      {t.timeline.viewSpecimensPrefix} {periodName} {t.timeline.viewSpecimensSuffix}
+                    </span>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
       </Container>
     </div>
   );

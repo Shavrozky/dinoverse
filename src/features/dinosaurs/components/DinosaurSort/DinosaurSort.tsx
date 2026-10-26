@@ -1,5 +1,6 @@
 import { useId, type FC } from 'react';
-import { DINOSAUR_SORT_OPTIONS, SORT_OPTION_LABELS, type DinosaurSortOption } from '../../types';
+import { formatLocalizedSortOption, useTranslation } from '@/i18n';
+import { DINOSAUR_SORT_OPTIONS, type DinosaurSortOption } from '../../types';
 import styles from './DinosaurSort.module.css';
 
 export interface DinosaurSortProps {
@@ -9,11 +10,12 @@ export interface DinosaurSortProps {
 
 export const DinosaurSort: FC<DinosaurSortProps> = ({ value, onChange }) => {
   const selectId = useId();
+  const { t, language } = useTranslation();
 
   return (
     <div className={styles.sortWrapper}>
       <label htmlFor={selectId} className={styles.label}>
-        Sort By
+        {t.explore.sortByLabel}
       </label>
       <select
         id={selectId}
@@ -23,7 +25,7 @@ export const DinosaurSort: FC<DinosaurSortProps> = ({ value, onChange }) => {
       >
         {DINOSAUR_SORT_OPTIONS.map((option) => (
           <option key={option} value={option}>
-            {SORT_OPTION_LABELS[option]}
+            {formatLocalizedSortOption(option, language)}
           </option>
         ))}
       </select>

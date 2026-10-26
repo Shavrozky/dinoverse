@@ -1,11 +1,6 @@
 import type { FC } from 'react';
-import { PERIOD_LABELS } from '@/data/periods';
-import {
-  DIET_LABELS,
-  type DietFilterValue,
-  type DinosaurFilterState,
-  type PeriodFilterValue,
-} from '../../types';
+import { formatLocalizedDiet, formatLocalizedPeriod, useTranslation } from '@/i18n';
+import type { DietFilterValue, DinosaurFilterState, PeriodFilterValue } from '../../types';
 import { formatResultCount } from '../../utils';
 import styles from './DinosaurResultCount.module.css';
 
@@ -28,16 +23,19 @@ export const DinosaurResultCount: FC<DinosaurResultCountProps> = ({
   onRemoveDiet,
   onClearAll,
 }) => {
+  const { t, language } = useTranslation();
+
   const renderPeriodChip = (period: PeriodFilterValue) => {
     if (period === 'all') return null;
+    const label = formatLocalizedPeriod(period, undefined, language);
     return (
       <button
         type="button"
         className={styles.chip}
         onClick={onRemovePeriod}
-        aria-label={`Remove ${PERIOD_LABELS[period]} period filter`}
+        aria-label={`${t.explore.removeFilterPrefix} ${label} ${t.explore.removePeriodFilterSuffix}`}
       >
-        <span>{PERIOD_LABELS[period]}</span>
+        <span>{label}</span>
         <span className={styles.chipRemove} aria-hidden="true">
           ×
         </span>
@@ -47,14 +45,15 @@ export const DinosaurResultCount: FC<DinosaurResultCountProps> = ({
 
   const renderDietChip = (diet: DietFilterValue) => {
     if (diet === 'all') return null;
+    const label = formatLocalizedDiet(diet, language);
     return (
       <button
         type="button"
         className={styles.chip}
         onClick={onRemoveDiet}
-        aria-label={`Remove ${DIET_LABELS[diet]} diet filter`}
+        aria-label={`${t.explore.removeFilterPrefix} ${label} ${t.explore.removeDietFilterSuffix}`}
       >
-        <span>{DIET_LABELS[diet]}</span>
+        <span>{label}</span>
         <span className={styles.chipRemove} aria-hidden="true">
           ×
         </span>
@@ -67,7 +66,7 @@ export const DinosaurResultCount: FC<DinosaurResultCountProps> = ({
   return (
     <div className={styles.resultBar} aria-live="polite">
       <div className={styles.leftGroup}>
-        <span className={styles.countText}>{formatResultCount(count)}</span>
+        <span className={styles.countText}>{formatResultCount(count, language)}</span>
 
         {hasActiveFilters && (
           <div className={styles.activeChips}>
@@ -76,7 +75,7 @@ export const DinosaurResultCount: FC<DinosaurResultCountProps> = ({
                 type="button"
                 className={styles.chip}
                 onClick={onRemoveSearch}
-                aria-label={`Remove search query "${trimmedSearch}"`}
+                aria-label={`${t.explore.removeSearchQueryPrefix} "${trimmedSearch}"`}
               >
                 <span>&ldquo;{trimmedSearch}&rdquo;</span>
                 <span className={styles.chipRemove} aria-hidden="true">
@@ -92,7 +91,7 @@ export const DinosaurResultCount: FC<DinosaurResultCountProps> = ({
 
       {hasActiveFilters && (
         <button type="button" className={styles.clearAllButton} onClick={onClearAll}>
-          Clear filters
+          {t.explore.clearFilters}
         </button>
       )}
     </div>

@@ -1,25 +1,33 @@
-import type { FC } from 'react';
+import type { FC, MutableRefObject } from 'react';
+import type { AppTheme } from '@/store/useAppSettings';
+import type { NormalizedPointer } from '@/hooks';
 import { HeroMuseumLighting } from '@/three/lighting';
 import { HeroDinosaur } from '@/three/components/HeroDinosaur';
 
 export interface HeroSceneProps {
   reducedMotion?: boolean;
+  theme?: AppTheme;
+  /** Shared normalized pointer, supplied by the hero's single listener. */
+  pointer?: MutableRefObject<NormalizedPointer>;
 }
 
 /**
  * Homepage Cinematic Exhibition Hero Scene.
  *
- * Replaces the temporary geometric primitive with an art-directed Velociraptor
- * holotype specimen illuminated by museum exhibition spotlights.
- *
- * Designed with fixed cinematic perspective, no OrbitControls, subtle pointer parallax,
- * and dramatic silhouette framing against the museum void.
+ * An art-directed Velociraptor digital specimen lit by theme-aware museum
+ * spotlights. Both the lighting and the model animate from the same timing
+ * contract so the exhibit reads as one event: the lights come up, the
+ * specimen settles onto its plinth.
  */
-export const HeroScene: FC<HeroSceneProps> = ({ reducedMotion = false }) => {
+export const HeroScene: FC<HeroSceneProps> = ({
+  reducedMotion = false,
+  theme = 'dark',
+  pointer,
+}) => {
   return (
     <>
-      <HeroMuseumLighting reducedMotion={reducedMotion} />
-      <HeroDinosaur reducedMotion={reducedMotion} />
+      <HeroMuseumLighting reducedMotion={reducedMotion} theme={theme} pointer={pointer} />
+      <HeroDinosaur reducedMotion={reducedMotion} pointer={pointer} />
     </>
   );
 };

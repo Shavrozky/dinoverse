@@ -1,3 +1,5 @@
+import { formatLocalizedPeriod } from '@/i18n/formatters';
+import type { AppLanguage } from '@/store/useAppSettings';
 import type { GeologicalPeriod } from '@/types';
 
 export interface PeriodInfo {
@@ -45,7 +47,10 @@ export function getPeriodInfo(period: GeologicalPeriod): PeriodInfo | undefined 
   return geologicalPeriods.find((item) => item.id === period);
 }
 
-export function formatPeriodLabel(period: GeologicalPeriod, stage?: string): string {
-  const baseLabel = PERIOD_LABELS[period];
-  return stage ? `${stage} ${baseLabel}` : baseLabel;
+export function formatPeriodLabel(
+  period: GeologicalPeriod,
+  stage?: string,
+  language: AppLanguage = 'en'
+): string {
+  return formatLocalizedPeriod(period, stage, language);
 }

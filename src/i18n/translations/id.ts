@@ -1,0 +1,246 @@
+import type { TranslationDictionary } from '../types';
+
+export const id: TranslationDictionary = {
+  nav: {
+    brandSubtitle: 'ARSIP PALEONTOLOGI',
+    brandAriaLabel: 'Beranda DinoVerse',
+    mainNavAriaLabel: 'Navigasi Utama',
+    explore: 'Jelajahi',
+    timeline: 'Linimasa',
+    compare: 'Bandingkan',
+    languageGroupAria: 'Pemilihan bahasa',
+    switchToEnglish: 'Ubah bahasa ke Bahasa Inggris',
+    switchToIndonesian: 'Ubah bahasa ke Bahasa Indonesia',
+    themeDark: 'Gelap',
+    themeLight: 'Terang',
+    switchToLightTheme: 'Beralih ke tema terang',
+    switchToDarkTheme: 'Beralih ke tema gelap',
+    audio: 'AUDIO',
+    muteSound: 'Bisukan suara pameran',
+    enableSound: 'Aktifkan suara pameran',
+    soundEnabledTitle: 'Suara Aktif',
+    soundMutedTitle: 'Suara Dibisukan',
+  },
+
+  footer: {
+    subtitle: 'ARSIP & PAMERAN PALEONTOLOGI DIGITAL',
+    description:
+      'Didedikasikan untuk eksplorasi ilmiah, visualisasi 3D, dan studi kronologis kehidupan Mesozoikum dari 252 hingga 66 juta tahun lalu.',
+    curationHeading: 'KURASI',
+    documentedSpecimens: '20 Spesimen Terdokumentasi',
+    erasList: 'Trias • Jura • Kapur',
+    viewportFeature: 'Ruang Pandang 3D Interaktif',
+    copyright: 'Arsip Paleontologi DinoVerse',
+    classifiedRecord: 'ERA MESOZOIKUM // ARSIP SPESIMEN',
+  },
+
+  hero: {
+    sectionAriaLabel: 'Pameran Utama Museum',
+    archiveBadge: 'Arsip Paleontologi Digital // Vol. 01',
+    exploreThe: 'Jelajahi',
+    titleLine1: 'Dunia',
+    titleLine2: 'Mesozoikum',
+    description:
+      'Sebuah pameran paleontologi interaktif yang mendokumentasikan kehidupan prasejarah dari periode Trias, Jura, hingga Kapur melalui spesimen digital dan catatan anatomi.',
+    enterArchiveCta: 'Jelajahi Arsip',
+    inspectVelociraptorCta: 'Periksa Velociraptor',
+    specimenAriaLabel: 'Identifikasi Spesimen Utama',
+    specimenTag: 'Spesimen // Spesimen Digital',
+    specimenMeta: 'Dromaeosauridae • Kapur Akhir',
+    statsAriaLabel: 'Statistik Arsip',
+    statErasValue: '03',
+    statErasLabel: 'Era Mesozoikum',
+    statErasDetail: 'Trias • Jura • Kapur',
+    statSpeciesValue: '20',
+    statSpeciesLabel: 'Spesies Terdokumentasi',
+    statSpeciesDetail: 'Theropoda, Sauropoda, & Ceratopsia',
+    statSpanValue: '186Jt',
+    statSpanLabel: 'Rentang Geologi',
+    statSpanDetail: '252 hingga 66 Juta Tahun Lalu',
+  },
+
+  home: {
+    documentTitle: 'Arsip Paleontologi Digital',
+    featuredSpecimen: {
+      specimenCode: 'SPESIMEN 001 // FOKUS PAMERAN',
+      geologicalAgeLabel: 'Usia Geologi',
+      geologicalAgeValue: '68—66 Jt',
+      totalLengthLabel: 'Panjang Total',
+      totalLengthValue: '12.3 M',
+      estimatedMassLabel: 'Perkiraan Massa',
+      estimatedMassValue: '~8.4 Ton',
+      examineRecordCta: 'Periksa Catatan Spesimen →',
+      visualBadge: 'PREDATOR PUNCAK KAPUR AKHIR',
+      visualFootnote: 'HELL CREEK FORMATION // AMERIKA UTARA',
+    },
+    eraOverview: {
+      eyebrow: 'Linimasa Stratigrafi',
+      title: 'Tiga Periode Mesozoikum',
+      eraWord: 'PERIODE',
+      myaUnit: 'JT',
+      exploreEraAriaPrefix: 'Jelajahi fosil periode',
+      exploreEraAriaSuffix: '',
+      filterLinkPrefix: 'Saring Arsip',
+      filterLinkSuffix: '→',
+    },
+    curatedSection: {
+      eyebrow: 'Koleksi Spesimen',
+      title: 'Spesimen Pilihan',
+      examineAllCta: 'Jelajahi Seluruh Arsip (20 Spesies) →',
+    },
+    inquirySection: {
+      eyebrow: 'RISET & KAJIAN',
+      title: 'Paleontologi Komparatif & Morfometrik',
+      description:
+        'Telusuri divergensi evolusi, proporsi anatomi, dan stratigrafi melalui perangkat perbandingan skala serta penjelajah linimasa geologi kami.',
+      compareCta: 'Buka Perbandingan Skala →',
+      timelineCta: 'Jelajahi Stratigrafi',
+    },
+  },
+
+  explore: {
+    documentTitle: 'Jelajahi Dinosaurus',
+    eyebrow: 'Arsip Spesimen Mesozoikum',
+    title: 'Ensiklopedia Dinosaurus',
+    subtitle:
+      'Temukan spesies prasejarah dari seluruh Era Mesozoikum. Cari berdasarkan taksonomi, saring menurut periode geologi dan pola makan, atau periksa profil anatomi terperinci.',
+    controlsAriaLabel: 'Pencarian dan penyaring katalog',
+    catalogResultsAriaLabel: 'Hasil katalog dinosaurus',
+    searchLabel: 'Cari di Arsip',
+    searchPlaceholder: 'Cari dinosaurus berdasarkan nama, nama ilmiah, klad, atau wilayah...',
+    clearSearchAria: 'Hapus kata kunci pencarian',
+    clearSearchTitle: 'Hapus pencarian',
+    periodFilterGroupAria: 'Saring berdasarkan periode geologi',
+    periodLabel: 'Periode',
+    dietFilterGroupAria: 'Saring berdasarkan pola makan',
+    dietLabel: 'Pola Makan',
+    allOption: 'Semua',
+    sortByLabel: 'Urutkan',
+    clearFilters: 'Hapus penyaring',
+    removeSearchQueryPrefix: 'Hapus kata kunci pencarian',
+    removeFilterPrefix: 'Hapus penyaring',
+    removePeriodFilterSuffix: 'periode',
+    removeDietFilterSuffix: 'pola makan',
+    emptyTitle: 'Tidak ada dinosaurus ditemukan',
+    emptyDescription:
+      'Tidak ada spesimen dalam arsip yang cocok dengan kriteria pencarian atau penyaring saat ini. Coba ubah kata kunci atau hapus beberapa penyaring.',
+    specimenLabel: 'SPESIMEN',
+    approxShort: 'sekitar',
+  },
+
+  detail: {
+    documentTitleSuffix: 'Arsip Spesimen',
+    notFoundDocumentTitle: 'Spesimen Tidak Ditemukan',
+    archiveNavAria: 'Navigasi arsip',
+    returnToArchive: '← Kembali ke Arsip',
+    returnToArchivePlain: 'Kembali ke Arsip',
+    exhibitionHome: 'Beranda Pameran',
+    adjacentNavAria: 'Spesimen dinosaurus berurutan',
+    previousSpecimen: '← Spesimen Sebelumnya',
+    nextSpecimen: 'Spesimen Berikutnya →',
+    notFoundTitle: 'Catatan Spesimen Tidak Ditemukan',
+    notFoundTextPrefix:
+      'Catatan fosil ini tidak dapat ditemukan dalam strata arsip Mesozoikum. Identifikasi catatan',
+    notFoundTextSuffix: 'mungkin belum terdokumentasi.',
+    visualViewportAria: 'Ruang pandang visual untuk',
+    modelCataloging: 'Spesimen 3D sedang dalam proses katalogisasi',
+    specimenArchivePrefix: 'Arsip spesimen:',
+    dietClassification: 'Klasifikasi Pola Makan',
+    totalLength: 'Panjang Total',
+    approxCapitalized: 'Sekitar',
+    estimatedMass: 'Perkiraan Massa',
+    primaryRegion: 'Wilayah Utama',
+    anatomicalSummary: 'Ringkasan Anatomi',
+    geologicalFormations: 'Formasi Geologi',
+    specimenClassification: 'Klasifikasi Spesimen',
+    geologicalPeriod: 'Periode Geologi',
+    temporalRange: 'Rentang Waktu',
+    diet: 'Pola Makan',
+    cladeFamily: 'Klad / Famili',
+    length: 'Panjang',
+    hipShoulderHeight: 'Tinggi Pinggul / Bahu',
+    estimatedWeight: 'Perkiraan Berat',
+    locations: 'Lokasi',
+    firstDiscovered: 'Tahun Ditemukan',
+    namedBy: 'Dinamai Oleh',
+    relatedEyebrow: 'Arsip Komparatif',
+    relatedTitle: 'Dinosaurus Terkait',
+  },
+
+  viewer: {
+    regionAriaPrefix: 'Penampil spesimen 3D interaktif untuk',
+    microInstruction: 'Seret untuk Memutar • Gulir untuk Memeriksa',
+    motionGroupAria: 'Status gerak spesimen',
+    motionLabel: 'Gerak',
+    actionLabels: {
+      IDLE: 'DIAM',
+      WALK: 'JALAN',
+      ROAR: 'RAUNG',
+    },
+    resetView: 'Atur Ulang Pandangan',
+    resetViewAria: 'Atur ulang pandangan kamera',
+    loadingEyebrow: 'Memuat Spesimen',
+    loadingDescription: 'Menyiapkan rekonstruksi digital...',
+    errorEyebrow: 'Spesimen Digital Tidak Tersedia',
+    errorDescription: 'Rekonstruksi fosil 3D tidak dapat dimuat dari arsip.',
+    retryButton: 'Muat Ulang Rekonstruksi',
+  },
+
+  timeline: {
+    documentTitle: 'Linimasa Geologi — Kronostratigrafi',
+    eyebrow: 'Catatan Kronostratigrafi',
+    title: 'Linimasa Geologi',
+    subtitle:
+      'Telusuri 186 juta tahun Era Mesozoikum. Lapisan stratigrafi merekam kemunculan, diversifikasi, hingga kepunahan massal dinosaurus non-unggas.',
+    eraWord: 'PERIODE',
+    myaUnit: 'JT',
+    periodHeadingSuffix: 'Periode',
+    viewSpecimensPrefix: 'Lihat Spesimen',
+    viewSpecimensSuffix: '→',
+  },
+
+  compare: {
+    documentTitle: 'Perbandingan Ukuran — Morfometrik Komparatif',
+    eyebrow: 'Morfometrik Komparatif',
+    title: 'Perbandingan Skala Spesimen',
+    subtitle:
+      'Perbandingan dimensi anatomi dan rasio massa secara berdampingan antara megafauna prasejarah dengan skala referensi modern.',
+    curationTitle: 'Ruang Pandang Morfometrik Dalam Kurasi',
+    curationDescription:
+      'Adegan perbandingan 3D multi-spesimen, hamparan skala kerangka, dan rasio biomekanik sedang disiapkan untuk sayap pameran ini.',
+  },
+
+  notFound: {
+    documentTitle: 'Spesimen Tidak Terkatalog — 404',
+    badge: 'KEKOSONGAN STRATIGRAFI // 404',
+    title: 'Jalur Punah',
+    description:
+      'Jalur arsip yang diminta telah terkikis ke dalam strata prasejarah. Tidak ada catatan spesimen atau ruang pameran yang sesuai dengan URL ini.',
+    returnBaseCta: 'Kembali ke Beranda Pameran →',
+  },
+
+  common: {
+    loadingDefault: 'Memuat dunia prasejarah...',
+    errorHeading: 'Terjadi kesalahan',
+    errorFallback: 'Terjadi kesalahan yang tidak terduga.',
+    tryAgain: 'Coba Lagi',
+  },
+
+  periods: {
+    triassic: {
+      name: 'Trias',
+      description:
+        'Awal Era Mesozoikum setelah peristiwa kepunahan besar Perm-Trias, ditandai oleh superbenua Pangaea serta kemunculan theropoda dan sauropodomorpha awal yang lincah.',
+    },
+    jurassic: {
+      name: 'Jura',
+      description:
+        'Masa keemasan sauropoda raksasa, stegosaurus berperekat lempeng, dan theropoda predator ikonik saat Pangaea mulai terbelah menjadi benua-benua yang lembap dan rimbun.',
+    },
+    cretaceous: {
+      name: 'Kapur',
+      description:
+        'Babak terakhir sekaligus terpanjang dari Era Mesozoikum, menyaksikan penyebaran tumbuhan berbunga, ceratopsia bertanduk, hadrosaurus berparuh bebek, dan tyrannosaurus raksasa.',
+    },
+  },
+};

@@ -1,4 +1,6 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { getTranslationDictionary } from '@/i18n';
+import { useAppSettings } from '@/store';
 
 interface Props {
   children: ReactNode;
@@ -33,6 +35,9 @@ export class ErrorBoundary extends Component<Props, State> {
         return this.props.fallback;
       }
 
+      const language = useAppSettings.getState().language;
+      const t = getTranslationDictionary(language);
+
       return (
         <div
           role="alert"
@@ -47,22 +52,22 @@ export class ErrorBoundary extends Component<Props, State> {
           }}
         >
           <h2 style={{ color: 'var(--color-danger)', marginBottom: '1rem' }}>
-            Something went wrong
+            {t.common.errorHeading}
           </h2>
           <p style={{ marginBottom: '1.5rem', color: 'var(--color-text-secondary)' }}>
-            {this.state.error?.message || 'An unexpected error occurred.'}
+            {this.state.error?.message || t.common.errorFallback}
           </p>
           <button
             onClick={this.handleReset}
             style={{
               padding: '0.625rem 1.25rem',
               backgroundColor: 'var(--color-accent)',
-              color: '#ffffff',
+              color: 'var(--button-primary-text)',
               borderRadius: 'var(--radius-sm)',
               fontWeight: 600,
             }}
           >
-            Try Again
+            {t.common.tryAgain}
           </button>
         </div>
       );

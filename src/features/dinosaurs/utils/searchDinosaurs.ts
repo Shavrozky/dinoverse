@@ -1,3 +1,4 @@
+import { getLocalizedDinosaurContent } from '@/i18n/formatters';
 import type { Dinosaur } from '@/types';
 
 /**
@@ -12,7 +13,8 @@ function toCompactToken(value: string): string {
 }
 
 /**
- * Checks whether a single dinosaur record matches the provided search query.
+ * Checks whether a single dinosaur record matches the provided search query
+ * across both English and Indonesian taxonomic/regional terms.
  */
 export function matchesDinosaurSearch(dinosaur: Dinosaur, query: string): boolean {
   const normalizedQuery = normalizeSearchTerm(query);
@@ -21,13 +23,16 @@ export function matchesDinosaurSearch(dinosaur: Dinosaur, query: string): boolea
   }
 
   const compactQuery = toCompactToken(normalizedQuery);
+  const localizedId = getLocalizedDinosaurContent(dinosaur, 'id');
 
   const searchableFields: string[] = [
     dinosaur.name,
     dinosaur.scientificName,
     dinosaur.clade,
     dinosaur.meaning ?? '',
+    localizedId.meaning,
     ...dinosaur.locations,
+    ...localizedId.locations,
     ...(dinosaur.aliases ?? []),
   ];
 

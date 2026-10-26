@@ -1,7 +1,10 @@
 import type { FC } from 'react';
 import { Container } from '@/components/ui';
+import { useTranslation } from '@/i18n';
 
 export const Footer: FC = () => {
+  const { t } = useTranslation();
+
   return (
     <footer
       style={{
@@ -47,7 +50,7 @@ export const Footer: FC = () => {
                 marginBottom: 'var(--space-3)',
               }}
             >
-              DIGITAL PALEONTOLOGY ARCHIVE & EXHIBITION
+              {t.footer.subtitle}
             </span>
             <p
               style={{
@@ -56,8 +59,7 @@ export const Footer: FC = () => {
                 lineHeight: 1.6,
               }}
             >
-              Dedicated to the scientific exploration, 3D visualization, and chronological study of
-              Mesozoic life from 252 to 66 million years ago.
+              {t.footer.description}
             </p>
           </div>
 
@@ -73,10 +75,12 @@ export const Footer: FC = () => {
               color: 'var(--fossil-stone)',
             }}
           >
-            <span style={{ color: 'var(--text-muted)', fontSize: '0.7rem' }}>CURATION</span>
-            <span>20 Documented Specimens</span>
-            <span>Triassic • Jurassic • Cretaceous</span>
-            <span>Interactive 3D Viewport</span>
+            <span style={{ color: 'var(--text-muted)', fontSize: '0.7rem' }}>
+              {t.footer.curationHeading}
+            </span>
+            <span>{t.footer.documentedSpecimens}</span>
+            <span>{t.footer.erasList}</span>
+            <span>{t.footer.viewportFeature}</span>
           </div>
         </div>
 
@@ -94,8 +98,10 @@ export const Footer: FC = () => {
             fontFamily: 'var(--font-family-mono)',
           }}
         >
-          <span>© {new Date().getFullYear()} DinoVerse Paleontology Archive</span>
-          <span>EST. MESOZOIC ERA // CLASSIFIED RECORD</span>
+          <span>
+            © {new Date().getFullYear()} {t.footer.copyright}
+          </span>
+          <span>{t.footer.classifiedRecord}</span>
         </div>
       </Container>
     </footer>

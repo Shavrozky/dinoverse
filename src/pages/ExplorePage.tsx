@@ -10,10 +10,12 @@ import {
   useDinosaurCatalog,
 } from '@/features/dinosaurs';
 import { useDocumentTitle } from '@/hooks';
+import { useTranslation } from '@/i18n';
 import styles from './ExplorePage.module.css';
 
 export const ExplorePage: FC = () => {
-  useDocumentTitle('Explore Dinosaurs');
+  const { t } = useTranslation();
+  useDocumentTitle(t.explore.documentTitle);
 
   const {
     filteredDinosaurs,
@@ -33,15 +35,12 @@ export const ExplorePage: FC = () => {
     <div className={styles.page}>
       <Container>
         <header className={styles.header}>
-          <span className={styles.eyebrow}>Mesozoic Specimen Archive</span>
-          <h1 className={styles.title}>Dinosaur Encyclopedia</h1>
-          <p className={styles.subtitle}>
-            Discover prehistoric species from across the Mesozoic Era. Search by taxonomy, filter by
-            geological period and diet, or inspect detailed anatomical profiles.
-          </p>
+          <span className={styles.eyebrow}>{t.explore.eyebrow}</span>
+          <h1 className={styles.title}>{t.explore.title}</h1>
+          <p className={styles.subtitle}>{t.explore.subtitle}</p>
         </header>
 
-        <section className={styles.controlsPanel} aria-label="Catalog search and filters">
+        <section className={styles.controlsPanel} aria-label={t.explore.controlsAriaLabel}>
           <DinosaurSearch value={filters.search} onChange={setSearch} />
 
           <div className={styles.filterSortRow}>
@@ -68,7 +67,7 @@ export const ExplorePage: FC = () => {
           onClearAll={clearFilters}
         />
 
-        <section className={styles.catalogSection} aria-label="Dinosaur catalog results">
+        <section className={styles.catalogSection} aria-label={t.explore.catalogResultsAriaLabel}>
           {resultCount > 0 ? (
             <DinosaurGrid dinosaurs={filteredDinosaurs} />
           ) : (
