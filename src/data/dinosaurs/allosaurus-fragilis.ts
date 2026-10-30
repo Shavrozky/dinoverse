@@ -24,4 +24,7 @@ export const allosaurusFragilis: Dinosaur = {
     'The dominant large predatory theropod of the Late Jurassic Morrison ecosystem, equipped with brow horns and grasping three-fingered forelimbs.',
   description:
     'Allosaurus fragilis stood at the top of the Late Jurassic food web in North America. Armed with laterally compressed, blade-like serrated teeth and powerful three-clawed forelimbs, it preyed upon ornithopods, stegosaurs, and juvenile sauropods. A pair of prominent lacrimal crests sat just ahead of and above its eyes.',
+  modelPath: '/models/dinosaurs/allosaurus/model.glb',
+  image: '/images/dinosaurs/tyrannosaurus-rex/tyranosaurus.jpg',
+  thumbnailPath: '/images/dinosaurs/allosaurus/thumbnail.jpg',
 };

@@ -1,0 +1,102 @@
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--museum-charcoal);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-4);
+}
+
+.filterGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.filter {
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  font-family: var(--font-family-label);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.filter:hover {
+  color: var(--bone-white);
+  background-color: var(--brass-subtle);
+}
+
+.filter:focus-visible {
+  outline: 1px solid var(--warm-brass);
+  outline-offset: 2px;
+}
+
+.filterActive {
+  color: var(--warm-brass);
+  border-color: var(--warm-brass);
+  background-color: var(--brass-subtle);
+}
+
+.rightGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.notice {
+  font-family: var(--font-family-label);
+  font-size: 0.62rem;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-danger);
+}
+
+.reset {
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-family-label);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--fossil-stone);
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.reset:hover {
+  color: var(--bone-white);
+  border-color: var(--border-medium);
+}
+
+.reset:focus-visible {
+  outline: 1px solid var(--warm-brass);
+  outline-offset: 2px;
+}
+
+@media (max-width: 760px) {
+  .controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rightGroup {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

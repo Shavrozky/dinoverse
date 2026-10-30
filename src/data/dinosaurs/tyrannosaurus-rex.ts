@@ -25,5 +25,7 @@ export const tyrannosaurusRex: Dinosaur = {
   description:
     'Tyrannosaurus rex was one of the largest known land carnivores of all time, inhabiting western North America during the final Maastrichtian age of the Late Cretaceous. Equipped with a heavily reinforced skull, serrated conical teeth, and acute stereoscopic vision and olfaction, it acted as both an apex predator and opportunistic scavenger across floodplains and subtropical forests.',
   modelPath: '/models/dinosaurs/tyrannosaurus-rex/model.glb',
+  image: '/images/dinosaurs/tyrannosaurus-rex/tyranosaurus.jpg',
+  thumbnailPath: '/images/dinosaurs/tyrannosaurus-rex/thumbnail.jpg',
   featured: true,
 };

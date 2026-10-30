@@ -1,28 +1,40 @@
 .section {
-  padding: var(--space-24) 0;
-  border-bottom: 1px solid var(--border-subtle);
   position: relative;
+
+  padding: var(--space-24) 0;
+
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .innerGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+
   gap: var(--space-12);
+
   align-items: center;
 }
 
 .infoColumn {
   display: flex;
   flex-direction: column;
+
   gap: var(--space-5);
 }
+
+/* ---------------------------------------------------------
+   SPECIMEN INFORMATION
+--------------------------------------------------------- */
 
 .specimenHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--border-subtle);
+
   padding-bottom: var(--space-3);
+
+  border-bottom: 1px solid var(--border-subtle);
+
   font-family: var(--font-family-label);
   font-size: 0.75rem;
   letter-spacing: var(--tracking-wider);
@@ -31,6 +43,7 @@
 
 .specimenCode {
   color: var(--warm-brass);
+
   font-weight: 700;
 }
 
@@ -44,33 +57,51 @@
 }
 
 .commonName {
+  margin: 0;
+
   font-family: var(--font-family-serif);
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   line-height: 1;
-  color: var(--bone-white);
+
   letter-spacing: -0.02em;
+
+  color: var(--text-primary);
 }
 
 .scientificName {
+  margin-top: 0.25rem;
+
   font-family: var(--font-family-serif);
   font-size: 1.5rem;
   font-style: italic;
+
   color: var(--warm-brass);
-  margin-top: 0.25rem;
 }
 
 .description {
+  margin: 0;
+
+  max-width: 66ch;
+
   font-size: var(--font-size-base);
-  color: var(--fossil-stone);
   line-height: 1.7;
+
+  color: var(--text-secondary);
 }
+
+/* ---------------------------------------------------------
+   METRICS
+--------------------------------------------------------- */
 
 .metricsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+
   gap: var(--space-4);
+
   padding: var(--space-4) 0;
+
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
 }
@@ -78,6 +109,7 @@
 .metricItem {
   display: flex;
   flex-direction: column;
+
   gap: 0.2rem;
 }
 
@@ -86,6 +118,7 @@
   font-size: 0.7rem;
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
+
   color: var(--text-muted);
 }
 
@@ -93,73 +126,265 @@
   font-family: var(--font-family-serif);
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--bone-white);
   line-height: 1;
+
+  color: var(--text-primary);
 }
 
-/* Visual Column */
+/* ---------------------------------------------------------
+   FEATURED SPECIMEN VISUAL
+--------------------------------------------------------- */
+
 .visualColumn {
   position: relative;
-  height: 480px;
-  background-color: var(--museum-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
+  isolation: isolate;
+
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  height: 480px;
+
   overflow: hidden;
+
+  background: var(--surface-primary);
+
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+
   box-shadow: var(--featured-visual-shadow);
+
+  /*
+   * Local specimen tokens.
+   *
+   * They live here rather than in variables.css because they are specific
+   * to this photographic exhibition panel.
+   */
+  --specimen-glow: rgba(208, 163, 93, 0.08);
+
+  --specimen-overlay-soft: rgba(7, 8, 7, 0.01);
+  --specimen-overlay-mid: rgba(7, 8, 7, 0.1);
+  --specimen-overlay-strong: rgba(7, 8, 7, 0.72);
 }
+
+/*
+ * Archive Light keeps the photograph dark, as if mounted inside a
+ * natural-history catalogue, but reduces the heavy black vignette.
+ */
+:global([data-theme='light']) .visualColumn {
+  --specimen-glow: rgba(157, 116, 50, 0.1);
+
+  --specimen-overlay-soft: rgba(24, 21, 16, 0);
+  --specimen-overlay-mid: rgba(24, 21, 16, 0.06);
+  --specimen-overlay-strong: rgba(24, 21, 16, 0.44);
+}
+
+/* ---------------------------------------------------------
+   THUMBNAIL
+--------------------------------------------------------- */
+
+.specimenThumbnail {
+  position: absolute;
+  inset: 0;
+
+  z-index: 0;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  /*
+   * Starting art direction for the current Tyrannosaurus image.
+   * Tune only this value later if the head needs shifting.
+   */
+  object-position: 50% 45%;
+
+  transform: scale(1.015);
+  transform-origin: center;
+
+  filter:
+    saturate(0.9)
+    contrast(1.06)
+    brightness(0.88);
+
+  transition:
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 500ms ease;
+}
+
+/* ---------------------------------------------------------
+   PHOTOGRAPHIC ATMOSPHERE
+--------------------------------------------------------- */
 
 .visualAtmosphere {
   position: absolute;
   inset: 0;
-  background: var(--featured-visual-bg);
+
   z-index: 1;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 56% 38%,
+      var(--specimen-glow),
+      transparent 48%
+    ),
+    linear-gradient(
+      to bottom,
+      var(--specimen-overlay-soft) 22%,
+      var(--specimen-overlay-mid) 60%,
+      var(--specimen-overlay-strong) 100%
+    );
 }
 
-.monogramLarge {
-  position: relative;
-  z-index: 2;
-  font-family: var(--font-family-serif);
-  font-size: 8rem;
-  font-style: italic;
-  font-weight: 400;
-  color: var(--monogram-color);
-  line-height: 1;
-  user-select: none;
+/*
+ * Subtle internal edge treatment makes the JPG feel integrated into the
+ * exhibition rather than pasted on top of the card.
+ */
+.visualAtmosphere::after {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  box-shadow:
+    inset 0 0 55px rgba(0, 0, 0, 0.12),
+    inset 0 -60px 90px rgba(0, 0, 0, 0.2);
 }
+
+:global([data-theme='light']) .visualAtmosphere::after {
+  box-shadow:
+    inset 0 0 45px rgba(33, 27, 19, 0.08),
+    inset 0 -50px 80px rgba(33, 27, 19, 0.12);
+}
+
+/* ---------------------------------------------------------
+   ARCHIVAL LABELS
+--------------------------------------------------------- */
 
 .visualBadge {
   position: absolute;
+
   top: var(--space-4);
   left: var(--space-4);
+
   z-index: 3;
+
   font-family: var(--font-family-label);
   font-size: 0.7rem;
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
+
   color: var(--warm-brass);
+
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.4);
 }
 
 .visualFootnote {
   position: absolute;
-  bottom: var(--space-4);
+
   right: var(--space-4);
+  bottom: var(--space-4);
+
   z-index: 3;
+
+  max-width: calc(100% - var(--space-8));
+
   font-family: var(--font-family-mono);
   font-size: 0.7rem;
+  line-height: 1.4;
+
+  text-align: right;
+
   color: var(--text-muted);
+
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.48);
 }
+
+/* ---------------------------------------------------------
+   POINTER INTERACTION
+--------------------------------------------------------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .visualColumn:hover .specimenThumbnail {
+    transform: scale(1.04);
+
+    filter:
+      saturate(0.96)
+      contrast(1.08)
+      brightness(0.94);
+  }
+}
+
+/* ---------------------------------------------------------
+   TABLET / MOBILE
+--------------------------------------------------------- */
 
 @media (max-width: 960px) {
   .innerGrid {
     grid-template-columns: 1fr;
+
     gap: var(--space-8);
   }
 
   .visualColumn {
-    height: 340px;
+    height: 360px;
+  }
+
+  .specimenThumbnail {
+    object-position: 50% 42%;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: var(--space-16) 0;
+  }
+
+  .metricsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: var(--space-3);
+  }
+
+  .metricValue {
+    font-size: 1.15rem;
+  }
+
+  .visualColumn {
+    height: 310px;
+  }
+
+  .visualBadge {
+    top: var(--space-3);
+    left: var(--space-3);
+  }
+
+  .visualFootnote {
+    right: var(--space-3);
+    bottom: var(--space-3);
+
+    font-size: 0.62rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .specimenThumbnail {
+    transition: none;
+  }
+
+  .visualColumn:hover .specimenThumbnail {
+    transform: scale(1.015);
+
+    filter:
+      saturate(0.9)
+      contrast(1.06)
+      brightness(0.88);
   }
 }

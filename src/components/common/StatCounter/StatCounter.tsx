@@ -27,7 +27,12 @@ export interface StatCounterProps {
  * is pure decoration layered on top, so screen readers and no-JS states still
  * get the real number.
  */
-export const StatCounter: FC<StatCounterProps> = ({ value, delay = 0, instant = false, className }) => {
+export const StatCounter: FC<StatCounterProps> = ({
+  value,
+  delay = 0,
+  instant = false,
+  className,
+}) => {
   const valueRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {

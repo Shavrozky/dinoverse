@@ -1,0 +1,94 @@
+/*
+  Period bands sit behind the range rows as a geological backdrop. They are
+  absolutely positioned with percentage widths derived from canonical period
+  records, so proportions are geological, not decorative.
+*/
+.bands {
+  position: relative;
+  height: 44px;
+  margin: 0 var(--timeline-pad-x, var(--space-6)) var(--space-2)
+    calc(
+      var(--timeline-pad-x, var(--space-6)) + var(--timeline-label-col, 190px) +
+        var(--timeline-col-gap, var(--space-4))
+    );
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.band {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.1rem;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border-subtle);
+  border-bottom: none;
+  background-color: transparent;
+  text-align: left;
+  overflow: hidden;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.band:hover {
+  background-color: var(--brass-subtle);
+  border-color: var(--border-medium);
+}
+
+.bandName {
+  font-family: var(--font-family-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--fossil-stone);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bandRange {
+  font-family: var(--font-family-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+  color: var(--timeline-range-text);
+  white-space: nowrap;
+}
+
+/* Muted period tinting — never rainbow. */
+.triassic {
+  background-color: var(--period-triassic);
+}
+
+.jurassic {
+  background-color: var(--period-jurassic);
+}
+
+.cretaceous {
+  background-color: var(--period-cretaceous);
+}
+
+.isActive {
+  border-color: var(--warm-brass);
+}
+
+.isActive .bandName {
+  color: var(--warm-brass);
+}
+
+@media (max-width: 760px) {
+  .bands {
+    height: 40px;
+  }
+
+  .bandName {
+    font-size: 0.62rem;
+  }
+
+  .bandRange {
+    display: none;
+  }
+}

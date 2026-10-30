@@ -36,6 +36,16 @@
   /* Theme-aware Surface & Atmosphere Tokens */
   --header-bg: rgba(7, 8, 7, 0.85);
   --header-bg-scrolled: rgba(9, 11, 9, 0.94);
+  /* Comparison plate silhouettes: bone ivory specimen, cool stone reference. */
+  --silhouette-dino: rgba(232, 226, 213, 0.82);
+  --silhouette-human: rgba(160, 168, 178, 0.7);
+  /* Muted geological period tinting — never rainbow. */
+  --period-triassic: rgba(120, 92, 64, 0.07);
+  --period-jurassic: rgba(74, 106, 96, 0.07);
+  --period-cretaceous: rgba(140, 104, 56, 0.09);
+  --period-tint: rgba(255, 255, 255, 0.018);
+  /* Small range text on the dark stage: 4.6:1 against rgb(21,24,21). */
+  --timeline-range-text: rgba(168, 162, 150, 0.95);
   --control-bg: rgba(20, 23, 20, 0.65);
   --input-bg: rgba(7, 8, 7, 0.6);
   --viewer-hud-bg: rgba(7, 8, 7, 0.72);
@@ -194,6 +204,16 @@
   /* Theme-aware Surface & Atmosphere Tokens */
   --header-bg: rgba(241, 237, 227, 0.9);
   --header-bg-scrolled: rgba(241, 237, 227, 0.97);
+  /* Archive Light: dark ink specimens on warm paper, muted brass reference. */
+  --silhouette-dino: rgba(28, 27, 23, 0.86);
+  --silhouette-human: rgba(90, 84, 72, 0.62);
+  /* Archive Light period bands: fossil-stone tints on warm paper. */
+  --period-triassic: rgba(150, 112, 72, 0.13);
+  --period-jurassic: rgba(84, 116, 104, 0.11);
+  --period-cretaceous: rgba(168, 126, 64, 0.14);
+  --period-tint: rgba(28, 27, 23, 0.03);
+  /* Small range text on the light stage: ≥4.5:1 against rgb(235,230,218). */
+  --timeline-range-text: rgba(58, 54, 45, 0.92);
   --control-bg: rgba(235, 230, 218, 0.85);
   --input-bg: rgba(250, 247, 240, 0.85);
   --viewer-hud-bg: rgba(241, 237, 227, 0.88);

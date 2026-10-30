@@ -1,0 +1,181 @@
+/*
+  The interactive axis. The track is the whole drag surface; the handle row
+  below carries the 44px touch target so the visual line can stay hairline-thin.
+*/
+.axis {
+  position: relative;
+  padding: var(--space-2) var(--timeline-pad-x, var(--space-6)) 0
+    calc(
+      var(--timeline-pad-x, var(--space-6)) + var(--timeline-label-col, 190px) +
+        var(--timeline-col-gap, var(--space-4))
+    );
+}
+
+.axisHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.axisBound {
+  font-family: var(--font-family-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  color: var(--warm-brass);
+  white-space: nowrap;
+}
+
+.axisHint {
+  font-family: var(--font-family-label);
+  font-size: 0.6rem;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--timeline-range-text);
+  text-align: center;
+}
+
+.track {
+  position: relative;
+  height: 74px;
+  cursor: ew-resize;
+  /* Vertical page scroll must still work on touch; horizontal drag is ours. */
+  touch-action: pan-y;
+  outline-offset: 4px;
+}
+
+.track:focus-visible {
+  outline: 1px solid var(--warm-brass);
+  border-radius: var(--radius-sm);
+}
+
+.trackLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 6px;
+  height: 1px;
+  background-color: var(--border-strong);
+}
+
+.tick {
+  position: absolute;
+  top: 0;
+  transform: translateX(-0.5px);
+}
+
+.tickMark {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 1px;
+  height: 9px;
+  background-color: var(--border-medium);
+}
+
+.tickLabel {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  transform: translateX(-50%);
+  font-family: var(--font-family-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+  color: var(--timeline-range-text);
+  white-space: nowrap;
+}
+
+/* K–Pg terminus hairline. */
+.kpg {
+  position: absolute;
+  top: -2px;
+  height: 22px;
+  width: 1px;
+  background-color: var(--color-danger);
+  opacity: 0.5;
+}
+
+.cursor {
+  position: absolute;
+  top: -4px;
+  height: 44px;
+  width: 0;
+  pointer-events: none;
+}
+
+.cursorLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1px;
+  width: 2px;
+  background-color: var(--warm-brass);
+}
+
+.handleRow {
+  position: relative;
+  margin-top: 40px;
+  height: 34px;
+  pointer-events: none;
+}
+
+/*
+  Handle: 44px of tappable area around a small visual marker. `translateX(-50%)`
+  keeps it centred on the cursor percent.
+*/
+.handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: flex-start;
+  padding-top: 2px;
+}
+
+.handle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  background-color: var(--warm-brass);
+}
+
+.handleValue {
+  margin-top: 10px;
+  font-family: var(--font-family-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--warm-brass);
+  white-space: nowrap;
+}
+
+.handlePeriod {
+  font-family: var(--font-family-label);
+  font-size: 0.55rem;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--timeline-range-text);
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .axisHint {
+    display: none;
+  }
+
+  .tickLabel {
+    font-size: 0.54rem;
+  }
+}

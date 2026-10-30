@@ -76,11 +76,7 @@ export const heroTimeline = {
 export const sceneRevealDelay = 0.38;
 
 /** Build a Framer Motion transition from the token system. */
-export function motionTransition(
-  duration: number,
-  delay = 0,
-  reducedMotion = false
-): Transition {
+export function motionTransition(duration: number, delay = 0, reducedMotion = false): Transition {
   if (reducedMotion) {
     return { duration: 0, delay: 0 };
   }

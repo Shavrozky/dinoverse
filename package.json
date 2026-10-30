@@ -11,7 +11,7 @@
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --import ./tests/register-alias.mjs --test src/features/dinosaurs/utils/dinosaurCatalog.test.ts"
+    "test": "node --experimental-strip-types --import ./tests/register-alias.mjs --test src/features/dinosaurs/utils/dinosaurCatalog.test.ts src/features/comparison/utils/comparison.test.ts src/features/timeline/utils/timeline.test.ts"
   },
   "dependencies": {
     "@react-three/drei": "^9.121.4",

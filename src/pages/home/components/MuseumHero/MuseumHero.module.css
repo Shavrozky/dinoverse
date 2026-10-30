@@ -1,17 +1,28 @@
 .heroSection {
   position: relative;
+  isolation: isolate;
+
   min-height: 88vh;
+
   display: flex;
   align-items: center;
+
   overflow: hidden;
+
   padding: var(--space-12) 0 var(--space-8);
+
   border-bottom: 1px solid var(--border-subtle);
+
+  background: var(--background-primary);
 }
 
 .contentWrapper {
-  position: static;
+  position: relative;
+  z-index: 4;
+
   display: flex;
   flex-direction: column;
+
   gap: var(--space-6);
 }
 
@@ -255,5 +266,198 @@
     max-width: 100%;
     margin-top: 0;
     padding-top: var(--space-6);
+  }
+}
+
+/* =========================================================
+   CINEMATIC HERO VIDEO
+========================================================= */
+
+.heroVideoLayer {
+  position: absolute;
+  inset: 0;
+
+  z-index: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  background: var(--background-primary);
+}
+
+.heroVideo {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: 58% center;
+
+  transform: scale(1.015);
+
+  filter:
+    brightness(0.64)
+    saturate(0.82)
+    contrast(1.08);
+}
+
+.heroVideoReady {
+  opacity: 1;
+}
+
+.heroVideoScrim {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 8, 7, 0.96) 0%,
+      rgba(7, 8, 7, 0.82) 26%,
+      rgba(7, 8, 7, 0.5) 48%,
+      rgba(7, 8, 7, 0.16) 72%,
+      rgba(7, 8, 7, 0.04) 100%
+    );
+
+  pointer-events: none;
+}
+
+.heroVideoVignette {
+  position: absolute;
+  inset: 0;
+
+  z-index: 2;
+
+  background:
+    radial-gradient(
+      ellipse at 68% 46%,
+      transparent 22%,
+      rgba(7, 8, 7, 0.08) 52%,
+      rgba(7, 8, 7, 0.58) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(7, 8, 7, 0.24) 0%,
+      transparent 24%,
+      transparent 65%,
+      rgba(7, 8, 7, 0.72) 100%
+    );
+
+  pointer-events: none;
+}
+
+.heroVideoFallback {
+  position: absolute;
+  inset: 0;
+
+  z-index: 0;
+
+  background:
+    radial-gradient(
+      circle at 70% 42%,
+      rgba(157, 116, 50, 0.12),
+      transparent 38%
+    ),
+    var(--background-primary);
+
+  pointer-events: none;
+}
+
+:global([data-theme='light'])
+  .heroVideo {
+  filter:
+    brightness(0.88)
+    saturate(0.7)
+    contrast(0.98)
+    sepia(0.08);
+}
+
+:global([data-theme='light'])
+  .heroVideoScrim {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(241, 237, 227, 0.97) 0%,
+      rgba(241, 237, 227, 0.86) 28%,
+      rgba(241, 237, 227, 0.52) 50%,
+      rgba(241, 237, 227, 0.16) 74%,
+      rgba(241, 237, 227, 0.04) 100%
+    );
+}
+
+:global([data-theme='light'])
+  .heroVideoVignette {
+  background:
+    radial-gradient(
+      ellipse at 68% 46%,
+      transparent 28%,
+      rgba(80, 68, 48, 0.04) 62%,
+      rgba(80, 68, 48, 0.18) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(241, 237, 227, 0.1),
+      transparent 32%,
+      transparent 72%,
+      rgba(80, 68, 48, 0.12)
+    );
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+  .heroVideo {
+    object-position: 68% center;
+
+    filter:
+      brightness(0.52)
+      saturate(0.76)
+      contrast(1.08);
+  }
+
+  .heroVideoScrim {
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(7, 8, 7, 0.45) 0%,
+        rgba(7, 8, 7, 0.58) 35%,
+        rgba(7, 8, 7, 0.82) 68%,
+        rgba(7, 8, 7, 0.96) 100%
+      );
+  }
+
+  :global([data-theme='light'])
+    .heroVideo {
+    filter:
+      brightness(0.82)
+      saturate(0.68)
+      contrast(0.95)
+      sepia(0.08);
+  }
+
+  :global([data-theme='light'])
+    .heroVideoScrim {
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(241, 237, 227, 0.38),
+        rgba(241, 237, 227, 0.68) 55%,
+        rgba(241, 237, 227, 0.96) 100%
+      );
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .heroVideo {
+    display: none;
   }
 }

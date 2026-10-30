@@ -1,0 +1,116 @@
+.timeline {
+  position: relative;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 1rem;
+
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+
+  color: var(--text-muted);
+}
+
+.periods {
+  display: grid;
+  grid-template-columns: 51fr 56fr 79fr;
+
+  min-width: 800px;
+
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.periods > div {
+  padding: 0.75rem 1rem;
+
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+
+  color: var(--text-secondary);
+}
+
+.triassic,
+.jurassic {
+  border-right: 1px solid var(--border-subtle);
+}
+
+.stage {
+  position: relative;
+
+  min-width: 800px;
+
+  padding-block: 2rem;
+}
+
+.cursor {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  width: 1px;
+
+  background: var(--accent-primary);
+
+  pointer-events: none;
+
+  z-index: 4;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+
+  min-height: 58px;
+
+  align-items: center;
+}
+
+.speciesName {
+  display: flex;
+  flex-direction: column;
+
+  padding-right: 1.5rem;
+}
+
+.speciesName strong {
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+}
+
+.speciesName span {
+  margin-top: 0.15rem;
+
+  font-family: var(--font-display);
+  font-style: italic;
+
+  color: var(--text-muted);
+}
+
+.rangeTrack {
+  position: relative;
+
+  height: 20px;
+
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.range {
+  position: absolute;
+
+  top: 50%;
+
+  height: 3px;
+
+  transform: translateY(-50%);
+
+  background: var(--accent-primary);
+}

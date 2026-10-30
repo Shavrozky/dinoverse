@@ -24,5 +24,8 @@ export const triceratopsHorridus: Dinosaur = {
     'A heavily built quadrupedal ceratopsian bearing three facial horns and a solid bony neck frill.',
   description:
     'Triceratops horridus was among the last non-avian dinosaurs to evolve prior to the Cretaceous–Paleogene extinction event. Sharing its North American floodplain habitat with Tyrannosaurus rex, it possessed a parrot-like beak adapted for shearing tough fibrous vegetation, rows of self-sharpening dental batteries, and an imposing cranial display of two brow horns, a nasal horn, and a solid bone frill.',
+  modelPath: '/models/dinosaurs/triceratops/model.glb',
+  image: '/images/dinosaurs/triceratops-horridus/triceratops.jpg',
+  thumbnailPath: '/images/dinosaurs/triceratops-horridus/thumbnail.jpg',
   featured: true,
 };

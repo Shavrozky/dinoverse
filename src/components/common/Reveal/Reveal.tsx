@@ -1,12 +1,7 @@
 import type { FC, ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { useReducedMotionPreference } from '@/hooks';
-import {
-  motionDistance,
-  motionDurations,
-  motionEasing,
-  revealViewport,
-} from '@/lib/motion';
+import { motionDistance, motionDurations, motionEasing, revealViewport } from '@/lib/motion';
 
 export interface RevealProps {
   children: ReactNode;

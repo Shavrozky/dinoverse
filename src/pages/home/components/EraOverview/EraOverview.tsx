@@ -49,8 +49,7 @@ export const EraOverview: FC = () => {
           </span>
           <p className={styles.eraDescription}>{periodDesc}</p>
           <span className={styles.eraLink}>
-            {t.home.eraOverview.filterLinkPrefix} {periodName}{' '}
-            {t.home.eraOverview.filterLinkSuffix}
+            {t.home.eraOverview.filterLinkPrefix} {periodName} {t.home.eraOverview.filterLinkSuffix}
             <span className={styles.eraArrow} aria-hidden="true">
               →
             </span>

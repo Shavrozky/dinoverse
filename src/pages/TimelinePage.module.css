@@ -3,8 +3,8 @@
 }
 
 .header {
-  margin-bottom: var(--space-12);
-  padding-bottom: var(--space-8);
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-6);
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -21,7 +21,7 @@
 
 .title {
   font-family: var(--font-family-serif);
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
   color: var(--bone-white);
   line-height: 1.05;
   margin-bottom: var(--space-3);
@@ -29,130 +29,159 @@
 
 .subtitle {
   color: var(--fossil-stone);
-  max-width: 640px;
+  max-width: 760px;
   line-height: 1.7;
 }
 
 /*
-  Chronological spine. The line is painted by the container; the animated
-  overlay above it draws down to the last marker with scaleY, so nothing
-  reflows while it animates.
+  Desktop: plot column + inspector column. The inspector is sticky so the
+  selected moment stays visible while the visitor scans the species list.
 */
-.timeline {
-  position: relative;
-  padding-left: var(--space-8);
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: var(--space-6);
+  align-items: start;
 }
 
-.spine {
-  position: absolute;
-  top: 0;
-  bottom: var(--space-8);
-  left: 3px;
-  width: 1px;
-  background-color: var(--border-medium);
-  transform-origin: top center;
+.stage {
+  --timeline-label-col: 190px;
+  --timeline-col-gap: var(--space-4);
+  --timeline-pad-x: var(--space-6);
+  background-color: var(--museum-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-4) 0 var(--space-5);
+  min-width: 0;
 }
 
-.eraList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-8);
+.scrollViewport {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
-.eraRow {
-  position: relative;
+.scrollTrack {
+  min-width: 640px;
 }
 
-.marker {
-  position: absolute;
-  top: var(--space-8);
-  left: calc(var(--space-8) * -1 + 0px);
-  width: 7px;
-  height: 7px;
-  border-radius: var(--radius-full);
-  background-color: var(--warm-brass);
-  transform: translateX(-3px);
+.disclaimer {
+  margin: var(--space-4) var(--space-6) 0;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.68rem;
+  line-height: 1.6;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+/* ---------------------------- Era index ---------------------------- */
+
+.eraSection {
+  margin-top: var(--space-12);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.eraHeading {
+  font-family: var(--font-family-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--warm-brass);
+  margin-bottom: var(--space-5);
+}
+
+.eraGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4);
 }
 
 .eraCard {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: 0.2rem;
+  padding: var(--space-5);
   background-color: var(--museum-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
-  padding: var(--space-8);
-  text-decoration: none;
-  color: inherit;
   transition:
     border-color var(--transition-fast),
-    background-color var(--transition-fast);
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .eraCard:hover {
-  border-color: var(--border-strong);
+  border-color: var(--border-medium);
   background-color: var(--museum-surface-elevated);
+  transform: translateY(-2px);
 }
 
 .eraCard:focus-visible {
   outline: 1px solid var(--warm-brass);
-  outline-offset: 3px;
+  outline-offset: 2px;
 }
 
-.eraMeta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.eraIndex {
   font-family: var(--font-family-mono);
-  font-size: 0.75rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
   color: var(--text-muted);
 }
 
-.eraAge {
-  color: var(--warm-brass);
-  font-family: var(--font-family-label);
-  letter-spacing: var(--tracking-wider);
+.eraName {
+  font-family: var(--font-family-serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--bone-white);
+  line-height: 1.2;
 }
 
-.eraHeading {
-  font-family: var(--font-family-serif);
-  font-size: var(--font-size-2xl);
-  color: var(--bone-white);
-  margin: var(--space-2) 0;
+.eraRange {
+  font-family: var(--font-family-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  color: var(--warm-brass);
 }
 
 .eraDescription {
-  font-size: var(--font-size-sm);
-  color: var(--fossil-stone);
+  margin-top: var(--space-2);
+  font-size: 0.82rem;
   line-height: 1.65;
+  color: var(--fossil-stone);
 }
 
-.eraLink {
-  margin-top: auto;
-  padding-top: var(--space-4);
-  font-family: var(--font-family-label);
-  font-size: 0.75rem;
-  letter-spacing: var(--tracking-wider);
-  text-transform: uppercase;
-  color: var(--warm-brass);
-}
-
-@media (max-width: 640px) {
-  .timeline {
-    padding-left: var(--space-6);
-  }
-
-  .eraCard {
-    padding: var(--space-5);
-  }
-
-  .marker {
-    left: calc(var(--space-6) * -1 + 0px);
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .spine {
-    display: none;
+@media (max-width: 760px) {
+  .page {
+    padding: var(--space-8) 0 var(--space-16);
+  }
+
+  .header {
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+  }
+
+  .stage {
+    --timeline-label-col: 132px;
+    --timeline-col-gap: var(--space-3);
+    --timeline-pad-x: var(--space-4);
+    padding: var(--space-3) 0 var(--space-4);
+  }
+
+  .disclaimer {
+    margin: var(--space-3) var(--space-4) 0;
+  }
+
+  .eraSection {
+    margin-top: var(--space-8);
   }
 }

@@ -1,0 +1,143 @@
+.statsSection {
+  background-color: var(--museum-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.statsHeader {
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.statsEyebrow {
+  display: block;
+  font-family: var(--font-family-label);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--warm-brass);
+  margin-bottom: var(--space-1);
+}
+
+.statsTitle {
+  font-family: var(--font-family-serif);
+  font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+  font-weight: 600;
+  color: var(--bone-white);
+  line-height: 1.1;
+}
+
+/*
+  Flat grid: every measurement cell is a direct child of the grid via
+  `display: contents` on the row wrapper, so columns stay aligned no matter how
+  many specimens are being compared.
+*/
+.table {
+  display: grid;
+  column-gap: var(--space-4);
+  row-gap: 0;
+  align-items: stretch;
+}
+
+.rowContents {
+  display: contents;
+}
+
+.cornerCell {
+  border-bottom: 1px solid var(--border-medium);
+}
+
+.columnHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-medium);
+}
+
+.columnName {
+  font-family: var(--font-family-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--bone-white);
+  line-height: 1.2;
+}
+
+.columnScientific {
+  font-family: var(--font-family-serif);
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--warm-brass);
+}
+
+.rowLabel {
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-family: var(--font-family-label);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.valueCell {
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-family: var(--font-family-serif);
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--bone-white);
+  line-height: 1.3;
+}
+
+/* Missing measurement: quiet italic, never a zero. */
+.valueMissing {
+  font-family: var(--font-family-label);
+  font-size: 0.78rem;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-muted);
+  text-transform: none;
+}
+
+.incompleteNote {
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+@media (max-width: 700px) {
+  .statsSection {
+    padding: var(--space-4);
+  }
+
+  .table {
+    column-gap: var(--space-3);
+  }
+
+  .columnName {
+    font-size: 0.88rem;
+  }
+
+  .columnScientific {
+    font-size: 0.7rem;
+  }
+
+  .valueCell {
+    font-size: 0.9rem;
+  }
+
+  .rowLabel {
+    font-size: 0.62rem;
+  }
+}

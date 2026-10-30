@@ -1,0 +1,130 @@
+.inspector {
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-4));
+  align-self: start;
+  background-color: var(--museum-surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 2px solid var(--warm-brass);
+  border-radius: var(--radius-sm);
+  padding: var(--space-5);
+}
+
+.timeBlock {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+
+.timeValue {
+  font-family: var(--font-family-serif);
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--bone-white);
+  font-variant-numeric: tabular-nums;
+}
+
+.timeUnit {
+  font-family: var(--font-family-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--warm-brass);
+}
+
+.periodName {
+  margin-top: var(--space-2);
+  font-family: var(--font-family-label);
+  font-size: 0.72rem;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--fossil-stone);
+}
+
+.divider {
+  height: 1px;
+  margin: var(--space-4) 0;
+  background-color: var(--border-subtle);
+}
+
+.speciesHeading {
+  font-family: var(--font-family-label);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--warm-brass);
+  margin-bottom: var(--space-3);
+}
+
+.speciesList {
+  list-style: none;
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.speciesLink {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  padding: 0.3rem 0.4rem;
+  border-radius: var(--radius-sm);
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.speciesLink:hover {
+  background-color: var(--brass-subtle);
+  transform: translateX(2px);
+}
+
+.speciesLink:focus-visible {
+  outline: 1px solid var(--warm-brass);
+  outline-offset: 1px;
+}
+
+.speciesName {
+  font-family: var(--font-family-serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--bone-white);
+  line-height: 1.2;
+}
+
+.speciesRange {
+  font-family: var(--font-family-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.03em;
+  color: var(--timeline-range-text);
+}
+
+.emptyNote {
+  margin-bottom: var(--space-4);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.boundaryNote {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.66rem;
+  line-height: 1.6;
+  color: var(--timeline-range-text);
+}
+
+@media (max-width: 900px) {
+  .inspector {
+    position: static;
+  }
+
+  .timeValue {
+    font-size: 1.9rem;
+  }
+}

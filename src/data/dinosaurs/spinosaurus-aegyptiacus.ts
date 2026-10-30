@@ -25,4 +25,6 @@ export const spinosaurusAegyptiacus: Dinosaur = {
   description:
     'Spinosaurus aegyptiacus inhabited the expansive river deltas and mangrove swamps of Cretaceous North Africa. Uniquely adapted for a semiaquatic lifestyle among giant theropods, it featured elongated jaws filled with conical, non-serrated teeth for seizing slippery aquatic prey, high-placed nostrils, dense limb bones for buoyancy control, and tall dorsal neural spines forming a prominent sail along its back.',
   featured: true,
+  image: '/images/dinosaurs/spinosaurus-aegyptiacus/spinosaurus.jpg',
+  thumbnailPath: '/images/dinosaurs/spinosaurus-aegyptiacus/thumbnail.jpg',
 };

@@ -1,0 +1,133 @@
+/*
+  Row list. Each row is a CSS grid of "name | track", so the bar area of every
+  row is the same width and bars remain directly comparable.
+*/
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: var(--timeline-label-col, 190px) 1fr;
+  align-items: center;
+  gap: var(--timeline-col-gap, var(--space-4));
+  padding: var(--space-2) var(--timeline-pad-x, var(--space-6));
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background-color var(--transition-fast);
+}
+
+.highlighted {
+  background-color: var(--brass-subtle);
+}
+
+.nameCell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  min-width: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.inactive .nameCell {
+  opacity: 0.34;
+}
+
+.name {
+  font-family: var(--font-family-serif);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--bone-white);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.range {
+  font-family: var(--font-family-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+  /* Dedicated token: --text-muted is tuned for large display type and falls to
+     3.9:1 on the light stage. Small mono text needs its own, darker value. */
+  color: var(--timeline-range-text);
+  white-space: nowrap;
+}
+
+.track {
+  position: relative;
+  height: 18px;
+  /* Hairline centre rule so short bars still read as "on" the axis. */
+  background-image: linear-gradient(
+    to bottom,
+    transparent calc(50% - 0.5px),
+    var(--border-subtle) calc(50% - 0.5px),
+    var(--border-subtle) calc(50% + 0.5px),
+    transparent calc(50% + 0.5px)
+  );
+}
+
+.trackBand {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: var(--period-tint);
+  pointer-events: none;
+}
+
+.trackBand + .trackBand {
+  border-left: 1px solid var(--border-subtle);
+}
+
+.bar {
+  position: absolute;
+  top: 50%;
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 1px;
+  background-color: var(--warm-brass);
+  transform-origin: left center;
+  transition:
+    opacity var(--transition-fast),
+    background-color var(--transition-fast),
+    height var(--transition-fast),
+    margin-top var(--transition-fast);
+}
+
+/* Active specimens get the bone-ivory treatment; inactive stay brass-dimmed. */
+.active .bar {
+  background-color: var(--bone-white);
+}
+
+.inactive .bar {
+  opacity: 0.34;
+  background-color: var(--fossil-stone);
+}
+
+.highlighted .bar {
+  opacity: 1;
+  height: 12px;
+  margin-top: -6px;
+  background-color: var(--warm-brass);
+}
+
+.cursorTick {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 1px;
+  background-color: var(--warm-brass);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+@media (max-width: 760px) {
+  .name {
+    font-size: 0.82rem;
+  }
+
+  .range {
+    font-size: 0.55rem;
+  }
+}

@@ -3,7 +3,7 @@
 }
 
 .header {
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-8);
   padding-bottom: var(--space-8);
   border-bottom: 1px solid var(--border-subtle);
 }
@@ -21,7 +21,7 @@
 
 .title {
   font-family: var(--font-family-serif);
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.25rem, 4.5vw, 3.75rem);
   color: var(--bone-white);
   line-height: 1.05;
   margin-bottom: var(--space-3);
@@ -29,41 +29,55 @@
 
 .subtitle {
   color: var(--fossil-stone);
-  max-width: 640px;
+  max-width: 680px;
   line-height: 1.7;
 }
 
-.placeholder {
-  padding: var(--space-16) var(--space-8);
+.invalidNotice {
+  margin-top: var(--space-3);
+  font-family: var(--font-family-label);
+  font-size: 0.7rem;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-danger);
+}
+
+/*
+  Selector rail: up to three slots side by side, collapsing to a single column
+  on narrow screens. The rail owns the page's horizontal rhythm.
+*/
+.selectorRail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-5);
+  padding: var(--space-5);
   background-color: var(--museum-surface);
-  border: 1px dashed var(--border-medium);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
-  text-align: center;
-}
-
-.placeholderIcon {
-  font-size: 3rem;
-  display: block;
   margin-bottom: var(--space-4);
-  opacity: 0.6;
 }
 
-.curationTitle {
-  font-family: var(--font-family-serif);
-  font-size: var(--font-size-2xl);
-  color: var(--bone-white);
-  margin-bottom: var(--space-2);
+/*
+  The stage container provides only a width to measure; height comes from the
+  plate itself, which the scale engine sizes from the tallest specimen.
+*/
+.stageMeasure {
+  width: 100%;
 }
 
-.curationText {
-  color: var(--text-muted);
-  max-width: 520px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
+@media (max-width: 700px) {
+  .page {
+    padding: var(--space-8) 0 var(--space-16);
+  }
 
-@media (max-width: 640px) {
-  .placeholder {
-    padding: var(--space-12) var(--space-5);
+  .header {
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-5);
+  }
+
+  .selectorRail {
+    grid-template-columns: 1fr;
+    padding: var(--space-4);
+    gap: var(--space-4);
   }
 }

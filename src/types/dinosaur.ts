@@ -37,6 +37,7 @@ export interface Dinosaur {
   shortDescription: string;
 
   image?: string;
+  thumbnailPath: string;
   modelPath?: string;
 
   featured?: boolean;
